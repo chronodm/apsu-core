@@ -10,6 +10,7 @@
 		63C19D3C19673E710055B3F1 /* ApsuCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 63C19D3B19673E710055B3F1 /* ApsuCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		63C19D4219673E710055B3F1 /* ApsuCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C19D3619673E710055B3F1 /* ApsuCore.framework */; };
 		63C19D4919673E710055B3F1 /* ApsuCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C19D4819673E710055B3F1 /* ApsuCoreTests.swift */; };
+		63C19D53196740220055B3F1 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C19D52196740220055B3F1 /* Entity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		63C19D4119673E710055B3F1 /* ApsuCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApsuCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		63C19D4719673E710055B3F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63C19D4819673E710055B3F1 /* ApsuCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApsuCoreTests.swift; sourceTree = "<group>"; };
+		63C19D52196740220055B3F1 /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			children = (
 				63C19D3B19673E710055B3F1 /* ApsuCore.h */,
 				63C19D3919673E710055B3F1 /* Supporting Files */,
+				63C19D52196740220055B3F1 /* Entity.swift */,
 			);
 			path = ApsuCore;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63C19D53196740220055B3F1 /* Entity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +320,7 @@
 		63C19D4D19673E710055B3F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -327,12 +332,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		63C19D4E19673E710055B3F1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -400,6 +407,7 @@
 				63C19D4E19673E710055B3F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		63C19D4F19673E710055B3F1 /* Build configuration list for PBXNativeTarget "ApsuCoreTests" */ = {
 			isa = XCConfigurationList;
@@ -408,6 +416,7 @@
 				63C19D5119673E710055B3F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
