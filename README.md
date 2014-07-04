@@ -1,4 +1,4 @@
-# apsu-core
+# ApsuCore
 
 A toy [Entity-Component System](http://t-machine.org/index.php/2007/09/03/entity-systems-are-the-future-of-mmog-development-part-1/)
 for game programming, implemented in (beginner-level) Swift, loosely
@@ -18,9 +18,3 @@ is the primordial freshwater ocean below the earth.
 ## License
 
 MIT; see [LICENSE.txt](https://github.com/chronodm/apsu-core-swift/blob/master/LICENSE.txt)
-
-# TODO
-
-Replace the basic XCTests with something more modern and BDD-ish
-(Sleipnir, Quick, ...?) once those are mature and distributed as
-CocoaPods.
