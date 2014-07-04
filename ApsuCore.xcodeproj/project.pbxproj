@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		63C19D3C19673E710055B3F1 /* ApsuCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 63C19D3B19673E710055B3F1 /* ApsuCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		63C19D4219673E710055B3F1 /* ApsuCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C19D3619673E710055B3F1 /* ApsuCore.framework */; };
-		63C19D4919673E710055B3F1 /* ApsuCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C19D4819673E710055B3F1 /* ApsuCoreTests.swift */; };
 		63C19D53196740220055B3F1 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C19D52196740220055B3F1 /* Entity.swift */; };
+		63C19D55196746480055B3F1 /* EntityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C19D54196746480055B3F1 /* EntityTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,8 +29,8 @@
 		63C19D3B19673E710055B3F1 /* ApsuCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApsuCore.h; sourceTree = "<group>"; };
 		63C19D4119673E710055B3F1 /* ApsuCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApsuCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		63C19D4719673E710055B3F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		63C19D4819673E710055B3F1 /* ApsuCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApsuCoreTests.swift; sourceTree = "<group>"; };
 		63C19D52196740220055B3F1 /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		63C19D54196746480055B3F1 /* EntityTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,8 +91,8 @@
 		63C19D4519673E710055B3F1 /* ApsuCoreTests */ = {
 			isa = PBXGroup;
 			children = (
-				63C19D4819673E710055B3F1 /* ApsuCoreTests.swift */,
 				63C19D4619673E710055B3F1 /* Supporting Files */,
+				63C19D54196746480055B3F1 /* EntityTests.swift */,
 			);
 			path = ApsuCoreTests;
 			sourceTree = "<group>";
@@ -221,7 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63C19D4919673E710055B3F1 /* ApsuCoreTests.swift in Sources */,
+				63C19D55196746480055B3F1 /* EntityTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
