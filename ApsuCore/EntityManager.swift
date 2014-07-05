@@ -32,8 +32,15 @@ class EntityManager {
     // ------------------------------------------------------------
     // Methods on single entities
 
-    func setNickname(e: Entity, nickname: String, error: NSErrorPointer = nil) -> String? {
-        assert(!nicknamesReverse[nickname], "Nickname already in use")
+    func getNickname(e: Entity) -> String? {
+        return nicknames[e]
+    }
+
+    func setNickname(e: Entity, nickname: String) -> String? {
+        if let other = nicknamesReverse[nickname] {
+            assert(false, "Nickname already in use")
+            return nil
+        }
 
         let oldNickname: String? = nicknames[e]
         nicknames[e] = nickname
