@@ -30,7 +30,7 @@ class EntityManagerTests: XCTestCase {
 
     func testNicknamesAreOptional() {
         let e = mgr.newEntity()
-        XCTAssert(!mgr.getNickname(e))
+        XCTAssert(mgr.getNickname(e) == nil)
     }
 
     func testNewEntityWithNicknameSetsNickname() {

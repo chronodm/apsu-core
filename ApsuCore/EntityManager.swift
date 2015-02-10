@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 David Moles. All rights reserved.
 //
 
-class EntityManager {
+public class EntityManager {
 
     // ------------------------------------------------------------
     // Fields
@@ -17,13 +17,18 @@ class EntityManager {
     var nextId: Int = 0
 
     // ------------------------------------------------------------
+    // Initializers
+
+    public init() {}
+
+    // ------------------------------------------------------------
     // Entity creation helpers
 
-    func newEntity() -> Entity {
-        return Entity(id: nextId++)
+    public func newEntity() -> Entity {
+        return Entity()
     }
 
-    func newEntity(nickname: String) -> Entity {
+    public func newEntity(nickname: String) -> Entity {
         let e = newEntity()
         setNickname(e, nickname: nickname)
         return e
@@ -32,11 +37,11 @@ class EntityManager {
     // ------------------------------------------------------------
     // Methods on single entities
 
-    func getNickname(e: Entity) -> String? {
+    public func getNickname(e: Entity) -> String? {
         return nicknames[e]
     }
 
-    func setNickname(e: Entity, nickname: String) -> String? {
+    public func setNickname(e: Entity, nickname: String) -> String? {
         if let other = nicknamesReverse[nickname] {
             assert(false, "Nickname already in use")
             return nil
@@ -48,7 +53,7 @@ class EntityManager {
         return oldNickname
     }
 
-    func clearNickname(e: Entity) -> String? {
+    public func clearNickname(e: Entity) -> String? {
         if let oldNickname = nicknames.removeValueForKey(e) {
             nicknamesReverse.removeValueForKey(oldNickname)
             return oldNickname
