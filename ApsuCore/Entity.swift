@@ -9,7 +9,6 @@
 public struct Entity: Hashable {
     public let id: CFUUID
     public let hashValue: Int
-//    public var hashValue: Int { return id.hashValue }
 
     public init(_ id: CFUUID) {
         self.id = id
