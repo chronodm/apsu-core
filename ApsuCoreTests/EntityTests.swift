@@ -55,7 +55,7 @@ class EntityTests: XCTestCase {
         }
         times.sort { $0 < $1 }
         let median = times[runs / 2] / Double(count)
-        println(median)
+//        println(median)
         XCTAssert(median < 5e-6)
     }
 }

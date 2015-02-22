@@ -9,7 +9,7 @@
 public class EntityManager {
 
     // ------------------------------------------------------------
-    // Fields
+    // MARK: - Fields
 
     var nicknames = Dictionary<Entity, String>()
     var nicknamesReverse = Dictionary<String, Entity>()
@@ -17,12 +17,12 @@ public class EntityManager {
     var nextId: Int = 0
 
     // ------------------------------------------------------------
-    // Initializers
+    // MARK: - Initializers
 
     public init() {}
 
     // ------------------------------------------------------------
-    // Entity creation helpers
+    // MARK: - Entity creation helpers
 
     public func newEntity() -> Entity {
         return Entity()
@@ -35,7 +35,7 @@ public class EntityManager {
     }
 
     // ------------------------------------------------------------
-    // Methods on single entities
+    // MARK: - Methods on single entities
 
     public func getNickname(e: Entity) -> String? {
         return nicknames[e]
@@ -43,7 +43,7 @@ public class EntityManager {
 
     public func setNickname(e: Entity, nickname: String) -> String? {
         if let other = nicknamesReverse[nickname] {
-            assert(false, "Nickname already in use")
+            NSException(name: DuplicateNameException, reason: "An entity with the nickname \(nickname) already exists", userInfo: nil).raise()
             return nil
         }
 

@@ -7,8 +7,14 @@
 //
 
 public struct Entity: Hashable {
+    // ------------------------------------------------------------
+    // MARK: - Fields
+
     public let id: CFUUID
     public let hashValue: Int
+
+    // ------------------------------------------------------------
+    // MARK: - Initializers
 
     public init(_ id: CFUUID) {
         self.id = id
@@ -22,6 +28,9 @@ public struct Entity: Hashable {
     }
 }
 
+// ------------------------------------------------------------
+// MARK: - Equatable
+
 public func == (lhs: Entity, rhs: Entity) -> Bool {
-    return CFEqual(lhs.id, rhs.id) != 0
+    return lhs.id == rhs.id
 }
