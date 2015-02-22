@@ -43,13 +43,16 @@ public class EntityManager {
 
     public func setNickname(e: Entity, nickname: String) -> String? {
         if let other = nicknamesReverse[nickname] {
-            NSException(name: DuplicateNameException, reason: "An entity with the nickname \(nickname) already exists", userInfo: nil).raise()
+            NSException(name: Exceptions.DuplicateName, reason: "An entity with the nickname \(nickname) already exists", userInfo: nil).raise()
             return nil
         }
 
         let oldNickname: String? = nicknames[e]
         nicknames[e] = nickname
         nicknamesReverse[nickname] = e
+        if let old = oldNickname {
+            nicknamesReverse.removeValueForKey(old)
+        }
         return oldNickname
     }
 
@@ -61,3 +64,4 @@ public class EntityManager {
         return nil
     }
 }
+
