@@ -4,5 +4,5 @@
 //
 
 public struct Exceptions {
-    public static let DuplicateName = "DuplicateName"
+    public static let DuplicateNameException = "DuplicateNameException"
 }

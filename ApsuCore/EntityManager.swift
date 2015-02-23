@@ -11,8 +11,8 @@ public class EntityManager {
     // ------------------------------------------------------------
     // MARK: - Fields
 
-    var nicknames = Dictionary<Entity, String>()
-    var nicknamesReverse = Dictionary<String, Entity>()
+    var nicknames: [Entity:String] = [:]
+    var nicknamesReverse: [String:Entity] = [:]
 
     var nextId: Int = 0
 
@@ -28,22 +28,22 @@ public class EntityManager {
         return Entity()
     }
 
-    public func newEntity(nickname: String) -> Entity {
-        let e = newEntity()
-        setNickname(e, nickname: nickname)
-        return e
+    public func newEntityWithNickname(nickname: String) -> Entity {
+        let entity = newEntity()
+        setNicknameForEntity(entity, nickname: nickname)
+        return entity
     }
 
     // ------------------------------------------------------------
     // MARK: - Methods on single entities
 
-    public func getNickname(e: Entity) -> String? {
+    public func getNicknameForEntity(e: Entity) -> String? {
         return nicknames[e]
     }
 
-    public func setNickname(e: Entity, nickname: String) -> String? {
+    public func setNicknameForEntity(e: Entity, nickname: String) -> String? {
         if let other = nicknamesReverse[nickname] {
-            NSException(name: Exceptions.DuplicateName, reason: "An entity with the nickname \(nickname) already exists", userInfo: nil).raise()
+            NSException(name: Exceptions.DuplicateNameException, reason: "An entity with the nickname \(nickname) already exists", userInfo: nil).raise()
             return nil
         }
 
@@ -56,7 +56,7 @@ public class EntityManager {
         return oldNickname
     }
 
-    public func clearNickname(e: Entity) -> String? {
+    public func clearNicknameForEntity(e: Entity) -> String? {
         if let oldNickname = nicknames.removeValueForKey(e) {
             nicknamesReverse.removeValueForKey(oldNickname)
             return oldNickname
