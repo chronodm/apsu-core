@@ -48,8 +48,9 @@ func get<T: LGComponent>(type: T.Type) -> T?
 }
 */
 
+// TODO some kind of genericized type key wrapper object using CFHash and CFEqual to implement Hashable
 //    func getComponentOfType<T: AnyObject>(type: T.Type, entity: Entity) -> T? {
-//        let typeName = NSStringFromClass(type)
+//        // let typeName = NSStringFromClass(type)
 //        return nil
 //    }
 
