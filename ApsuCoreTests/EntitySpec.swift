@@ -22,8 +22,7 @@ class EntitySpec: QuickSpec {
                 for i in 0..<runs {
                     let startSeconds = CFAbsoluteTimeGetCurrent()
                     for j in 0..<count {
-                        CFUUIDCreate(nil)
-                        // Entity()
+                        Entity()
                     }
                     let timeSeconds = CFAbsoluteTimeGetCurrent() - startSeconds
                     timesSeconds.append(timeSeconds)
