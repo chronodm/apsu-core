@@ -49,6 +49,7 @@ func get<T: LGComponent>(type: T.Type) -> T?
 */
 
 //    func getComponentOfType<T: AnyObject>(type: T.Type, entity: Entity) -> T? {
+//        let typeName = NSStringFromClass(type)
 //        return nil
 //    }
 
