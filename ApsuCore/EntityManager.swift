@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 David Moles. All rights reserved.
 //
 
+import Foundation
+
 public class EntityManager {
 
     // ------------------------------------------------------------
@@ -14,7 +16,7 @@ public class EntityManager {
     var nicknames: [Entity:String] = [:]
     var nicknamesReverse: [String:Entity] = [:]
 
-    var nextId: Int = 0
+//   private val components = new mutable.OpenHashMap[ru.TypeTag[_], mutable.OpenHashMap[Entity, _]]()
 
     // ------------------------------------------------------------
     // MARK: - Initializers
@@ -35,7 +37,23 @@ public class EntityManager {
     }
 
     // ------------------------------------------------------------
-    // MARK: - Methods on single entities
+    // MARK: - Component methods
+
+    //   def get[C1](e: Entity)(implicit t: ru.TypeTag[C1]): Option[C1]
+
+/*
+func get<T: LGComponent>(type: T.Type) -> T?
+{
+    return components[type.type()] as? T
+}
+*/
+
+//    func getComponentOfType<T: AnyObject>(type: T.Type, entity: Entity) -> T? {
+//        return nil
+//    }
+
+    // ------------------------------------------------------------
+    // MARK: - Convenience methods
 
     public func getNicknameForEntity(e: Entity) -> String? {
         return nicknames[e]
@@ -63,5 +81,7 @@ public class EntityManager {
         }
         return nil
     }
+
+
 }
 

@@ -83,6 +83,101 @@ class EntityManagerSpec: QuickSpec {
                 expect(oldNickname).to(equal(nickname))
                 expect(manager!.getNicknameForEntity(e1)).to(beNil())
             }
+
+            // ------------------------------
+            // MARK: - Components
+
+            struct SomeComponent {
+                let id: Int
+                init(_ id: Int) {
+                    self.id = id
+                }
+            }
+
+            struct OtherComponent {
+                let id: Int
+                init(_ id: Int) {
+                    self.id = id
+                }
+            }
+
+        //  "set()/get()" should "set/get a component" in { mgr =>
+        //    val e = mgr.newEntity()
+        //    val c = SomeComponent(0)
+        //
+        //    mgr.set(e, c)
+        //    mgr.get[SomeComponent](e) should be(Some(c))
+        //  }
+
+            describe ("its set()/get() methods") {
+                it ("should set/get a component") {
+                    let entity = manager!.newEntity()
+                    let component = SomeComponent(0)
+                }
+            }
+
+        //  "set()" should "replace existing components" in { mgr =>
+        //    val e = mgr.newEntity()
+        //    val c0 = SomeComponent(0)
+        //    val c1 = SomeComponent(1)
+        //
+        //    mgr.set(e, c0)
+        //    mgr.set(e, c1)
+        //    mgr.get[SomeComponent](e) should be(Some(c1))
+        //  }
+        //
+        //  it should "support components of multiple types" in { mgr =>
+        //    val e = mgr.newEntity()
+        //    val c0 = SomeComponent(0)
+        //    val c1 = OtherComponent(1)
+        //    mgr.set(e, c0)
+        //    mgr.set(e, c1)
+        //    mgr.get[SomeComponent](e) should be(Some(c0))
+        //    mgr.get[OtherComponent](e) should be(Some(c1))
+        //  }
+        //
+        //  it should "disallow setting an entity as a component" in { mgr =>
+        //    val e = mgr.newEntity()
+        //    val e1 = Entity()
+        //    evaluating({
+        //      mgr.set(e, e1)
+        //    }) should produce[IllegalArgumentException]
+        //    evaluating({
+        //      mgr.set(e1, e)
+        //    }) should produce[IllegalArgumentException]
+        //  }
+        //
+        //  "get()" should "return None for unset components" in { mgr =>
+        //    val e = mgr.newEntity()
+        //    mgr.get[SomeComponent](e) should be(None)
+        //  }
+        //
+        //  "has()" should "return true for set components" in { mgr =>
+        //    val e = mgr.newEntity()
+        //    val c = SomeComponent(0)
+        //
+        //    mgr.set(e, c)
+        //    mgr.has[SomeComponent](e) should be(true)
+        //  }
+        //
+        //  it should "return false for unset components" in { mgr =>
+        //    val e = mgr.newEntity()
+        //    mgr.has[SomeComponent](e) should be(false)
+        //  }
+        //
+        //  "remove()" should "return previous value for set component" in { mgr =>
+        //    val e = mgr.newEntity()
+        //    val c = SomeComponent(0)
+        //
+        //    mgr.set(e, c)
+        //    mgr.remove[SomeComponent](e) should be(Some(c))
+        //  }
+        //
+        //  it should "return None for unset components" in { mgr =>
+        //    val e = mgr.newEntity()
+        //    mgr.remove[SomeComponent](e) should be(None)
+        //  }
+
         }
     }
 }
