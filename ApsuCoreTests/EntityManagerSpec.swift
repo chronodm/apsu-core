@@ -13,9 +13,9 @@ import Nimble
 class EntityManagerSpec: QuickSpec {
     override func spec() {
         describe("an entity manager") {
-            var manager: EntityManager?
+            var manager: DictionaryBasedEntityManager?
 
-            beforeEach { manager = EntityManager() }
+            beforeEach { manager = DictionaryBasedEntityManager() }
 
             // ------------------------------
             // MARK: - Entity creation

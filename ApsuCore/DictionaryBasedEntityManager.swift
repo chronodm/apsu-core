@@ -8,15 +8,14 @@
 
 import Foundation
 
-public class EntityManager {
+public class DictionaryBasedEntityManager {
 
     // ------------------------------------------------------------
     // MARK: - Fields
 
-    var nicknames: [Entity:String] = [:]
-    var nicknamesReverse: [String:Entity] = [:]
-
-//   private val components = new mutable.OpenHashMap[ru.TypeTag[_], mutable.OpenHashMap[Entity, _]]()
+    private var nicknames: [Entity:String] = [:]
+    private var nicknamesReverse: [String:Entity] = [:]
+    private var components: [KeyForType:[Entity:AnyObject]] = [:]
 
     // ------------------------------------------------------------
     // MARK: - Initializers
@@ -24,7 +23,7 @@ public class EntityManager {
     public init() {}
 
     // ------------------------------------------------------------
-    // MARK: - Entity creation helpers
+    // MARK: - Entity methods
 
     public func newEntity() -> Entity {
         return Entity()
@@ -36,23 +35,57 @@ public class EntityManager {
         return entity
     }
 
+    public func deleteEntity(entity: Entity) {
+        for (var componentMap) in components.values {
+            componentMap.removeValueForKey(entity)
+        }
+        clearNicknameForEntity(entity)
+    }
+
     // ------------------------------------------------------------
     // MARK: - Component methods
 
-    //   def get[C1](e: Entity)(implicit t: ru.TypeTag[C1]): Option[C1]
+    private func componentsForType<T: AnyObject>(type: T.Type) -> [Entity:AnyObject]? {
+        return components[KeyForType(type)]
+    }
+
+    public func getComponentOfType<T: AnyObject>(type: T.Type, entity: Entity) -> T? {
+        return componentsForType(type)?[entity] as T?
+    }
+
+    public func setComponentOfType<T: AnyObject>(type: T.Type, entity: Entity, component: T) {
+        if var m = componentsForType(type) {
+            m[entity] = component
+        } else {
+            components[KeyForType(type)] = [entity:component]
+        }
+    }
+
+    public func removeComponentOfType<T: AnyObject>(type: T.Type, entity: Entity) -> T? {
+        if var m = componentsForType(type) {
+            return m.removeValueForKey(entity) as T?
+        } else {
+            return nil
+        }
+    }
+
+    // TODO: replace the inner map with something generic that implements the Sequence protocol
+    // cf. http://natashatherobot.com/swift-conform-to-sequence-protocol/
 
 /*
-func get<T: LGComponent>(type: T.Type) -> T?
-{
-    return components[type.type()] as? T
-}
+  override def all[C1](implicit t: ru.TypeTag[C1]): Iterable[(Entity, C1)] = {
+    mapFor[C1] match {
+      case Some(m) => m
+      case _ => Iterable.empty[(Entity, C1)]
+    }
+  }
+
+  override def allComponents(e: Entity): Iterable[Any] = {
+    components.values.map((m) => m.get(e)).flatten
+  }
 */
 
-// TODO some kind of genericized type key wrapper object using CFHash and CFEqual to implement Hashable
-//    func getComponentOfType<T: AnyObject>(type: T.Type, entity: Entity) -> T? {
-//        // let typeName = NSStringFromClass(type)
-//        return nil
-//    }
+    public func allComponentsOfType<T: AnyObject>(type: T.Type)
 
     // ------------------------------------------------------------
     // MARK: - Convenience methods

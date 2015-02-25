@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5AF0E758702840B326CC7D52 /* ComponentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF0E9F30A970092DA28A9EE /* ComponentKey.swift */; };
 		5AF0ED33633E192A7997BFA5 /* Exceptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF0E88C5ED917CFF0070725 /* Exceptions.swift */; };
 		63C19D3C19673E710055B3F1 /* ApsuCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 63C19D3B19673E710055B3F1 /* ApsuCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		63C19D4219673E710055B3F1 /* ApsuCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C19D3619673E710055B3F1 /* ApsuCore.framework */; };
 		63C19D53196740220055B3F1 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C19D52196740220055B3F1 /* Entity.swift */; };
-		63C19D57196751FE0055B3F1 /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C19D56196751FE0055B3F1 /* EntityManager.swift */; };
+		63C19D57196751FE0055B3F1 /* DictionaryBasedEntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C19D56196751FE0055B3F1 /* DictionaryBasedEntityManager.swift */; };
 		63F3F14D1A9966B7007BF513 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63F3F1381A99665B007BF513 /* Nimble.framework */; };
 		63F3F14E1A9966B7007BF513 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63F3F1421A99665B007BF513 /* Quick.framework */; };
 		63F3F1501A996789007BF513 /* EntitySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F3F14F1A996789007BF513 /* EntitySpec.swift */; };
@@ -101,13 +102,14 @@
 
 /* Begin PBXFileReference section */
 		5AF0E88C5ED917CFF0070725 /* Exceptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exceptions.swift; sourceTree = "<group>"; };
+		5AF0E9F30A970092DA28A9EE /* ComponentKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentKey.swift; sourceTree = "<group>"; };
 		63C19D3619673E710055B3F1 /* ApsuCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ApsuCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63C19D3A19673E710055B3F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63C19D3B19673E710055B3F1 /* ApsuCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApsuCore.h; sourceTree = "<group>"; };
 		63C19D4119673E710055B3F1 /* ApsuCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApsuCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		63C19D4719673E710055B3F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63C19D52196740220055B3F1 /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
-		63C19D56196751FE0055B3F1 /* EntityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
+		63C19D56196751FE0055B3F1 /* DictionaryBasedEntityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryBasedEntityManager.swift; sourceTree = "<group>"; };
 		63F3F1291A99665B007BF513 /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = Vendor/Nimble/Nimble.xcodeproj; sourceTree = SOURCE_ROOT; };
 		63F3F12C1A99665B007BF513 /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = Vendor/Quick/Quick.xcodeproj; sourceTree = SOURCE_ROOT; };
 		63F3F14F1A996789007BF513 /* EntitySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntitySpec.swift; sourceTree = "<group>"; };
@@ -160,9 +162,10 @@
 				63C19D3B19673E710055B3F1 /* ApsuCore.h */,
 				63C19D3919673E710055B3F1 /* Supporting Files */,
 				63C19D52196740220055B3F1 /* Entity.swift */,
-				63C19D56196751FE0055B3F1 /* EntityManager.swift */,
+				63C19D56196751FE0055B3F1 /* DictionaryBasedEntityManager.swift */,
 				63F3F1611A99941E007BF513 /* CFUUIDExtensions.swift */,
 				5AF0E88C5ED917CFF0070725 /* Exceptions.swift */,
+				5AF0E9F30A970092DA28A9EE /* ComponentKey.swift */,
 			);
 			path = ApsuCore;
 			sourceTree = "<group>";
@@ -410,10 +413,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63C19D57196751FE0055B3F1 /* EntityManager.swift in Sources */,
+				63C19D57196751FE0055B3F1 /* DictionaryBasedEntityManager.swift in Sources */,
 				63C19D53196740220055B3F1 /* Entity.swift in Sources */,
 				63F3F1621A99941E007BF513 /* CFUUIDExtensions.swift in Sources */,
 				5AF0ED33633E192A7997BFA5 /* Exceptions.swift in Sources */,
+				5AF0E758702840B326CC7D52 /* ComponentKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
