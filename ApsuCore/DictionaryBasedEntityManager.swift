@@ -53,7 +53,8 @@ public class DictionaryBasedEntityManager {
         return componentsForType(type)?[entity] as T?
     }
 
-    public func setComponentOfType<T: AnyObject>(type: T.Type, entity: Entity, component: T) {
+    public func setComponent<T: AnyObject>(component: T, entity: Entity) {
+        let type = T.self
         if var m = componentsForType(type) {
             m[entity] = component
         } else {
@@ -85,7 +86,7 @@ public class DictionaryBasedEntityManager {
   }
 */
 
-    public func allComponentsOfType<T: AnyObject>(type: T.Type)
+//    public func allComponentsOfType<T: AnyObject>(type: T.Type)
 
     // ------------------------------------------------------------
     // MARK: - Convenience methods

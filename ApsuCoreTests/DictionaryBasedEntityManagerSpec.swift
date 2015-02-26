@@ -1,5 +1,5 @@
 //
-//  EntityManagerSpec.swift
+//  DictionaryBasedEntityManagerSpec.swift
 //  ApsuCore
 //
 //  Created by David Moles on 2/21/15.
@@ -10,7 +10,7 @@ import ApsuCore
 import Quick
 import Nimble
 
-class EntityManagerSpec: QuickSpec {
+class DictionaryBasedEntityManagerSpec: QuickSpec {
     override func spec() {
         describe("an entity manager") {
             var manager: DictionaryBasedEntityManager?
@@ -87,45 +87,39 @@ class EntityManagerSpec: QuickSpec {
             // ------------------------------
             // MARK: - Components
 
-            struct SomeComponent {
-                let id: Int
-                init(_ id: Int) {
-                    self.id = id
-                }
-            }
-
-            struct OtherComponent {
-                let id: Int
-                init(_ id: Int) {
-                    self.id = id
-                }
-            }
-
-        //  "set()/get()" should "set/get a component" in { mgr =>
-        //    val e = mgr.newEntity()
-        //    val c = SomeComponent(0)
-        //
-        //    mgr.set(e, c)
-        //    mgr.get[SomeComponent](e) should be(Some(c))
-        //  }
 
             describe ("its set()/get() methods") {
                 it ("should set/get a component") {
                     let entity = manager!.newEntity()
                     let component = SomeComponent(0)
+                    manager!.setComponent(component, entity: entity)
+                    expect(manager!.getComponentOfType(SomeComponent.self, entity: entity)).to(beIdenticalTo(component))
                 }
             }
 
-        //  "set()" should "replace existing components" in { mgr =>
-        //    val e = mgr.newEntity()
-        //    val c0 = SomeComponent(0)
-        //    val c1 = SomeComponent(1)
-        //
-        //    mgr.set(e, c0)
-        //    mgr.set(e, c1)
-        //    mgr.get[SomeComponent](e) should be(Some(c1))
-        //  }
-        //
+            describe ("its set() method") {
+                it ("should replace existing components") {
+                    let entity = manager!.newEntity()
+                    let component0 = SomeComponent(0)
+                    let component1 = SomeComponent(1)
+
+                    manager!.setComponent(component0, entity: entity)
+                    manager!.setComponent(component1, entity: entity)
+                    expect(manager!.getComponentOfType(SomeComponent.self, entity: entity)).to(beIdenticalTo(component1))
+                }
+
+                it ("should support components of multiple types on an entity") {
+                    let entity = manager!.newEntity()
+                    let component0 = SomeComponent(0)
+                    let component1 = OtherComponent(1)
+
+                    manager!.setComponent(component0, entity: entity)
+                    manager!.setComponent(component1, entity: entity)
+                    expect(manager!.getComponentOfType(SomeComponent.self, entity: entity)).to(beIdenticalTo(component0))
+                    expect(manager!.getComponentOfType(OtherComponent.self, entity: entity)).to(beIdenticalTo(component1))
+                }
+            }
+
         //  it should "support components of multiple types" in { mgr =>
         //    val e = mgr.newEntity()
         //    val c0 = SomeComponent(0)
@@ -179,5 +173,19 @@ class EntityManagerSpec: QuickSpec {
         //  }
 
         }
+    }
+}
+
+private class SomeComponent {
+    let id: Int
+    private init(_ id: Int) {
+        self.id = id
+    }
+}
+
+private class OtherComponent {
+    let id: Int
+    private init(_ id: Int) {
+        self.id = id
     }
 }
