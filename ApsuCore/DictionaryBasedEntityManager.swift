@@ -15,6 +15,8 @@ public class DictionaryBasedEntityManager {
 
     private var nicknames: [Entity:String] = [:]
     private var nicknamesReverse: [String:Entity] = [:]
+
+    // This is actually [KeyForType<T>:[Entity:T]] but Swift generics aren't rich enough
     private var components: [KeyForType:[Entity:AnyObject]] = [:]
 
     // ------------------------------------------------------------
@@ -45,8 +47,9 @@ public class DictionaryBasedEntityManager {
     // ------------------------------------------------------------
     // MARK: - Component methods
 
-    private func componentsForType<T: AnyObject>(type: T.Type) -> [Entity:AnyObject]? {
-        return components[KeyForType(type)]
+    private func componentsForType<T: AnyObject>(type: T.Type) -> [Entity:T]? {
+        // TODO should this take care of creating new maps?
+        return components[KeyForType(type)] as [Entity:T]?
     }
 
     public func getComponentOfType<T: AnyObject>(type: T.Type, entity: Entity) -> T? {
@@ -55,14 +58,16 @@ public class DictionaryBasedEntityManager {
 
     public func setComponent<T: AnyObject>(component: T, entity: Entity) {
         let type = T.self
-        if var m = componentsForType(type) {
-            m[entity] = component
+        if var existingMap = componentsForType(type) {
+            existingMap[entity] = component
         } else {
+            // TODO var newMap: [Entity:T] = [entity:component]
             components[KeyForType(type)] = [entity:component]
         }
     }
 
     public func removeComponentOfType<T: AnyObject>(type: T.Type, entity: Entity) -> T? {
+        // TODO should this remove empty maps?
         if var m = componentsForType(type) {
             return m.removeValueForKey(entity) as T?
         } else {
@@ -70,23 +75,19 @@ public class DictionaryBasedEntityManager {
         }
     }
 
-    // TODO: replace the inner map with something generic that implements the Sequence protocol
-    // cf. http://natashatherobot.com/swift-conform-to-sequence-protocol/
-
-/*
-  override def all[C1](implicit t: ru.TypeTag[C1]): Iterable[(Entity, C1)] = {
-    mapFor[C1] match {
-      case Some(m) => m
-      case _ => Iterable.empty[(Entity, C1)]
+    public func allComponentsOfType<T: AnyObject>(type: T.Type) -> SequenceOf<(Entity, T)> {
+        if let existingMap = componentsForType(type) {
+            return SequenceOf(existingMap)
+        } else {
+            let emptyMap: [Entity:T] = [:]
+            return SequenceOf(emptyMap)
+        }
     }
-  }
-
+/*
   override def allComponents(e: Entity): Iterable[Any] = {
     components.values.map((m) => m.get(e)).flatten
   }
 */
-
-//    public func allComponentsOfType<T: AnyObject>(type: T.Type)
 
     // ------------------------------------------------------------
     // MARK: - Convenience methods
