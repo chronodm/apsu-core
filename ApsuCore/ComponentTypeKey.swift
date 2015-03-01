@@ -5,7 +5,7 @@
 
 import Foundation
 
-public class KeyForType: Hashable {
+public class ComponentTypeKey: Hashable {
 
     private let type: AnyClass
 
@@ -20,7 +20,7 @@ public class KeyForType: Hashable {
     }
 }
 
-public func == (lhs: KeyForType, rhs: KeyForType) -> Bool {
+public func == (lhs: ComponentTypeKey, rhs: ComponentTypeKey) -> Bool {
     return CFEqual(lhs.type, rhs.type) != 0
 }
 

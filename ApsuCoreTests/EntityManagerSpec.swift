@@ -1,5 +1,5 @@
 //
-//  DictionaryBasedEntityManagerSpec.swift
+//  EntityManagerSpec.swift
 //  ApsuCore
 //
 //  Created by David Moles on 2/21/15.
@@ -10,12 +10,12 @@ import ApsuCore
 import Quick
 import Nimble
 
-class DictionaryBasedEntityManagerSpec: QuickSpec {
+class EntityManagerSpec: QuickSpec {
     override func spec() {
         describe("an entity manager") {
-            var manager: DictionaryBasedEntityManager?
+            var manager: EntityManager?
 
-            beforeEach { manager = DictionaryBasedEntityManager() }
+            beforeEach { manager = EntityManager() }
 
             // ------------------------------
             // MARK: - Entity creation

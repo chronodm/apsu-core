@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class DictionaryBasedEntityManager {
+public class EntityManager {
 
     // ------------------------------------------------------------
     // MARK: - Fields
@@ -17,7 +17,7 @@ public class DictionaryBasedEntityManager {
     private var nicknamesReverse: [String:Entity] = [:]
 
     // This is actually [KeyForType<T>:[Entity:T]] but Swift generics aren't rich enough
-    private var components: [KeyForType:[Entity:AnyObject]] = [:]
+    private var components: [ComponentTypeKey:[Entity:AnyObject]] = [:]
 
     // ------------------------------------------------------------
     // MARK: - Initializers
@@ -48,22 +48,22 @@ public class DictionaryBasedEntityManager {
     // MARK: - Component methods
 
     public func getComponentOfType<T: AnyObject>(type: T.Type, entity: Entity) -> T? {
-        return components[KeyForType(type)]?[entity] as T?
+        return components[ComponentTypeKey(type)]?[entity] as T?
     }
 
     public func setComponent<T: AnyObject>(component: T, entity: Entity) {
         let type = T.self
-        if var existingMap = components[KeyForType(type)] {
+        if var existingMap = components[ComponentTypeKey(type)] {
             existingMap[entity] = component
-            components[KeyForType(type)] = existingMap // TODO why
+            components[ComponentTypeKey(type)] = existingMap // TODO why
         } else {
-            components[KeyForType(type)] = [entity:component]
+            components[ComponentTypeKey(type)] = [entity:component]
         }
     }
 
     public func removeComponentOfType<T: AnyObject>(type: T.Type, entity: Entity) -> T? {
         // TODO should this remove empty maps?
-        if var m = components[KeyForType(type)] {
+        if var m = components[ComponentTypeKey(type)] {
             return m.removeValueForKey(entity) as T?
         } else {
             return nil
