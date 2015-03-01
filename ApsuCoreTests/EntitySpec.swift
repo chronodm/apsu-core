@@ -13,10 +13,10 @@ import Nimble
 class EntitySpec: QuickSpec {
     override func spec() {
         describe("an entity") {
-
-            it("should take less than 2μs to create") {
-                let runs = 25
-                let count = 1000
+            let expected_μs = 2
+            it("should take less than \(expected_μs)μs to create") {
+                let runs = 37
+                let count = 5000
 
                 var timesSeconds = [Double]()
                 for i in 0..<runs {
@@ -29,9 +29,9 @@ class EntitySpec: QuickSpec {
                 }
                 timesSeconds.sort { $0 < $1 }
                 let medianSeconds = timesSeconds[runs / 2] / Double(count)
-                let medianμs = medianSeconds * 1e6
+                let median_μs = medianSeconds * 1e6
 //                println(medianμs)
-                expect(medianμs).to(beLessThan(2))
+                expect(median_μs).to(beLessThan(expected_μs))
             }
 
             it("should be equal to itself") {

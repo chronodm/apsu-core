@@ -6,12 +6,18 @@
 //  Copyright (c) 2014 David Moles. All rights reserved.
 //
 
-public struct Entity: Hashable {
+public struct Entity: Hashable, Printable {
     // ------------------------------------------------------------
     // MARK: - Fields
 
     public let id: CFUUID
     public let hashValue: Int
+    public var description: String {
+        get {
+            let idString: String = CFUUIDCreateString(nil, id)
+            return "Entity(\(idString))"
+        }
+    }
 
     // ------------------------------------------------------------
     // MARK: - Initializers

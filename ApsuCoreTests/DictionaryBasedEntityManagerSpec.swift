@@ -105,7 +105,9 @@ class DictionaryBasedEntityManagerSpec: QuickSpec {
 
                     manager!.setComponent(component0, entity: entity)
                     manager!.setComponent(component1, entity: entity)
-                    expect(manager!.getComponentOfType(SomeComponent.self, entity: entity)).to(beIdenticalTo(component1))
+
+                    let actual = manager!.getComponentOfType(SomeComponent.self, entity: entity)
+                    expect(actual).to(beIdenticalTo(component1))
                 }
 
                 it ("should support components of multiple types on an entity") {
@@ -176,16 +178,20 @@ class DictionaryBasedEntityManagerSpec: QuickSpec {
     }
 }
 
-private class SomeComponent {
+private class SomeComponent: Printable {
     let id: Int
+    let description: String
     private init(_ id: Int) {
         self.id = id
+        self.description = "SomeComponent(\(id))"
     }
 }
 
-private class OtherComponent {
+private class OtherComponent: Printable {
     let id: Int
+    let description: String
     private init(_ id: Int) {
         self.id = id
+        self.description = "OtherComponent(\(id))"
     }
 }

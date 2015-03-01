@@ -47,42 +47,37 @@ public class DictionaryBasedEntityManager {
     // ------------------------------------------------------------
     // MARK: - Component methods
 
-    private func componentsForType<T: AnyObject>(type: T.Type) -> [Entity:T]? {
-        // TODO should this take care of creating new maps?
-        return components[KeyForType(type)] as [Entity:T]?
-    }
-
     public func getComponentOfType<T: AnyObject>(type: T.Type, entity: Entity) -> T? {
-        return componentsForType(type)?[entity] as T?
+        return components[KeyForType(type)]?[entity] as T?
     }
 
     public func setComponent<T: AnyObject>(component: T, entity: Entity) {
         let type = T.self
-        if var existingMap = componentsForType(type) {
+        if var existingMap = components[KeyForType(type)] {
             existingMap[entity] = component
+            components[KeyForType(type)] = existingMap // TODO why
         } else {
-            // TODO var newMap: [Entity:T] = [entity:component]
             components[KeyForType(type)] = [entity:component]
         }
     }
 
     public func removeComponentOfType<T: AnyObject>(type: T.Type, entity: Entity) -> T? {
         // TODO should this remove empty maps?
-        if var m = componentsForType(type) {
+        if var m = components[KeyForType(type)] {
             return m.removeValueForKey(entity) as T?
         } else {
             return nil
         }
     }
 
-    public func allComponentsOfType<T: AnyObject>(type: T.Type) -> SequenceOf<(Entity, T)> {
-        if let existingMap = componentsForType(type) {
-            return SequenceOf(existingMap)
-        } else {
-            let emptyMap: [Entity:T] = [:]
-            return SequenceOf(emptyMap)
-        }
-    }
+//    public func allComponentsOfType<T: AnyObject>(type: T.Type) -> SequenceOf<(Entity, T)> {
+//        if let existingMap = components[KeyForType(type)] {
+//            return SequenceOf(existingMap)
+//        } else {
+//            let emptyMap: [Entity:T] = [:]
+//            return SequenceOf(emptyMap)
+//        }
+//    }
 /*
   override def allComponents(e: Entity): Iterable[Any] = {
     components.values.map((m) => m.get(e)).flatten
