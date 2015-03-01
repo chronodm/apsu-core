@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5AF0E758702840B326CC7D52 /* ComponentTypeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF0E9F30A970092DA28A9EE /* ComponentTypeKey.swift */; };
 		5AF0ED33633E192A7997BFA5 /* Exceptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF0E88C5ED917CFF0070725 /* Exceptions.swift */; };
+		5AF0EFEBD88BB85EE6F1A2C1 /* ComponentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF0E122A723489EBB832B76 /* ComponentStore.swift */; };
 		63B0D2381AA22E760051B047 /* EntityManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B0D2371AA22E760051B047 /* EntityManagerSpec.swift */; };
 		63C19D3C19673E710055B3F1 /* ApsuCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 63C19D3B19673E710055B3F1 /* ApsuCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		63C19D4219673E710055B3F1 /* ApsuCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C19D3619673E710055B3F1 /* ApsuCore.framework */; };
@@ -101,6 +102,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5AF0E122A723489EBB832B76 /* ComponentStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentStore.swift; sourceTree = "<group>"; };
 		5AF0E88C5ED917CFF0070725 /* Exceptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exceptions.swift; sourceTree = "<group>"; };
 		5AF0E9F30A970092DA28A9EE /* ComponentTypeKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentTypeKey.swift; sourceTree = "<group>"; };
 		63B0D2371AA22E760051B047 /* EntityManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityManagerSpec.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				63C19D56196751FE0055B3F1 /* EntityManager.swift */,
 				63B0D25D1AA397FB0051B047 /* Util */,
 				5AF0E9F30A970092DA28A9EE /* ComponentTypeKey.swift */,
+				5AF0E122A723489EBB832B76 /* ComponentStore.swift */,
 			);
 			path = ApsuCore;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 				63F3F1621A99941E007BF513 /* CFUUIDExtensions.swift in Sources */,
 				5AF0ED33633E192A7997BFA5 /* Exceptions.swift in Sources */,
 				5AF0E758702840B326CC7D52 /* ComponentTypeKey.swift in Sources */,
+				5AF0EFEBD88BB85EE6F1A2C1 /* ComponentStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
