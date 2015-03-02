@@ -5,13 +5,14 @@
 
 import Foundation
 
-// TODO is this just a marker or can we put some useful stuff on it
-// TODO which methods / props don't need type specialization?
-protocol ComponentStore: SequenceType {
+protocol ComponentStore {
+    var count: Int { get }
+    var isEmpty: Bool { get }
+
+    mutating func removeComponentFor(entity: Entity)
 }
 
-// TODO name
-class CS<T>: ComponentStore {
+class TypedComponentStore<T>: ComponentStore, SequenceType {
 
     // ------------------------------------------------------------
     // Fields
@@ -44,6 +45,10 @@ class CS<T>: ComponentStore {
 
     func setComponent(component: T, forEntity entity: Entity) {
         componentsForEntities.updateValue(component, forKey: entity)
+    }
+
+    func getComponentFor(entity: Entity) -> T? {
+        return componentsForEntities[entity]
     }
 
     func removeComponentFor(entity: Entity) {

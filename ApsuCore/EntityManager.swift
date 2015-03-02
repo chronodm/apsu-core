@@ -16,8 +16,7 @@ public class EntityManager {
     private var nicknames: [Entity:String] = [:]
     private var nicknamesReverse: [String:Entity] = [:]
 
-    // This is actually [KeyForType<T>:[Entity:T]] but Swift generics aren't rich enough
-    private var components: [ComponentTypeKey:[Entity:AnyObject]] = [:]
+    private var components: [ComponentTypeKey:ComponentStore] = [:]
 
     // ------------------------------------------------------------
     // MARK: - Initializers
@@ -39,7 +38,7 @@ public class EntityManager {
 
     public func deleteEntity(entity: Entity) {
         for (var componentMap) in components.values {
-            componentMap.removeValueForKey(entity)
+            componentMap.removeComponentFor(entity)
         }
         clearNicknameForEntity(entity)
     }
@@ -47,27 +46,51 @@ public class EntityManager {
     // ------------------------------------------------------------
     // MARK: - Component methods
 
+    private func getComponentStore<T: AnyObject>(forType type: T.Type) -> TypedComponentStore<T>? {
+        return components[ComponentTypeKey(type)] as TypedComponentStore<T>?
+    }
+
+    private func getOrCreateComponentStore<T: AnyObject>(forType type: T.Type) -> TypedComponentStore<T> {
+        if var store = getComponentStore(forType: type) {
+            return store
+        } else {
+            var store = TypedComponentStore<T>()
+            components[ComponentTypeKey(type)] = store
+            return store
+        }
+    }
+
     public func getComponentOfType<T: AnyObject>(type: T.Type, entity: Entity) -> T? {
-        return components[ComponentTypeKey(type)]?[entity] as T?
+        return getComponentStore(forType: type)?.getComponentFor(entity)
+//        return components[ComponentTypeKey(type)]?[entity] as T?
     }
 
     public func setComponent<T: AnyObject>(component: T, entity: Entity) {
         let type = T.self
-        if var existingMap = components[ComponentTypeKey(type)] {
-            existingMap[entity] = component
-            components[ComponentTypeKey(type)] = existingMap // TODO why
-        } else {
-            components[ComponentTypeKey(type)] = [entity:component]
-        }
+        var store = getOrCreateComponentStore(forType: type)
+        store.setComponent(component, forEntity: entity)
+
+//        let type = T.self
+//        if var existingMap = components[ComponentTypeKey(type)] {
+//            existingMap[entity] = component
+//            components[ComponentTypeKey(type)] = existingMap // TODO why
+//        } else {
+//            components[ComponentTypeKey(type)] = [entity:component]
+//        }
     }
 
-    public func removeComponentOfType<T: AnyObject>(type: T.Type, entity: Entity) -> T? {
+    // TODO share code w/deleteEntity
+    public func removeComponentOfType<T: AnyObject>(type: T.Type, entity: Entity) {
         // TODO should this remove empty maps?
-        if var m = components[ComponentTypeKey(type)] {
-            return m.removeValueForKey(entity) as T?
-        } else {
-            return nil
+        if var store = getComponentStore(forType: type) {
+            store.removeComponentFor(entity)
         }
+
+//        if var m = components[ComponentTypeKey(type)] {
+//            return m.removeValueForKey(entity) as T?
+//        } else {
+//            return nil
+//        }
     }
 
 //    public func allComponentsOfType<T: AnyObject>(type: T.Type) -> SequenceOf<(Entity, T)> {
