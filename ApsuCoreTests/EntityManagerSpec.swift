@@ -52,7 +52,7 @@ class EntityManagerSpec: QuickSpec {
                 manager!.setNicknameForEntity(e, nickname: "Priscilla")
                 expect(manager!.getNicknameForEntity(e)).to(equal("Priscilla"))
             }
-            
+
             it ("should free an old nickname when you change it") {
                 let e1 = manager!.newEntityWithNickname("Elvis")
                 manager!.setNicknameForEntity(e1, nickname: "Priscilla")
@@ -84,29 +84,30 @@ class EntityManagerSpec: QuickSpec {
                 expect(manager!.getNicknameForEntity(e1)).to(beNil())
             }
 
+            // TODO test that delete (1) removes components and (2) frees nickname
+
             // ------------------------------
             // MARK: - Components
 
-
-            describe ("its set()/get() methods") {
+            describe ("its set/get methods") {
                 it ("should set/get a component") {
                     let entity = manager!.newEntity()
                     let component = SomeComponent(0)
-                    manager!.setComponent(component, entity: entity)
-                    expect(manager!.getComponentOfType(SomeComponent.self, entity: entity)).to(beIdenticalTo(component))
+                    manager!.setComponent(component, forEntity: entity)
+                    expect(manager!.getComponentOfType(SomeComponent.self, forEntity: entity)).to(beIdenticalTo(component))
                 }
             }
 
-            describe ("its set() method") {
+            describe ("its set method") {
                 it ("should replace existing components") {
                     let entity = manager!.newEntity()
                     let component0 = SomeComponent(0)
                     let component1 = SomeComponent(1)
 
-                    manager!.setComponent(component0, entity: entity)
-                    manager!.setComponent(component1, entity: entity)
+                    manager!.setComponent(component0, forEntity: entity)
+                    manager!.setComponent(component1, forEntity: entity)
 
-                    let actual = manager!.getComponentOfType(SomeComponent.self, entity: entity)
+                    let actual = manager!.getComponentOfType(SomeComponent.self, forEntity: entity)
                     expect(actual).to(beIdenticalTo(component1))
                 }
 
@@ -115,23 +116,13 @@ class EntityManagerSpec: QuickSpec {
                     let component0 = SomeComponent(0)
                     let component1 = OtherComponent(1)
 
-                    manager!.setComponent(component0, entity: entity)
-                    manager!.setComponent(component1, entity: entity)
-                    expect(manager!.getComponentOfType(SomeComponent.self, entity: entity)).to(beIdenticalTo(component0))
-                    expect(manager!.getComponentOfType(OtherComponent.self, entity: entity)).to(beIdenticalTo(component1))
+                    manager!.setComponent(component0, forEntity: entity)
+                    manager!.setComponent(component1, forEntity: entity)
+                    expect(manager!.getComponentOfType(SomeComponent.self, forEntity: entity)).to(beIdenticalTo(component0))
+                    expect(manager!.getComponentOfType(OtherComponent.self, forEntity: entity)).to(beIdenticalTo(component1))
                 }
             }
 
-        //  it should "support components of multiple types" in { mgr =>
-        //    val e = mgr.newEntity()
-        //    val c0 = SomeComponent(0)
-        //    val c1 = OtherComponent(1)
-        //    mgr.set(e, c0)
-        //    mgr.set(e, c1)
-        //    mgr.get[SomeComponent](e) should be(Some(c0))
-        //    mgr.get[OtherComponent](e) should be(Some(c1))
-        //  }
-        //
         //  it should "disallow setting an entity as a component" in { mgr =>
         //    val e = mgr.newEntity()
         //    val e1 = Entity()
@@ -142,12 +133,14 @@ class EntityManagerSpec: QuickSpec {
         //      mgr.set(e1, e)
         //    }) should produce[IllegalArgumentException]
         //  }
-        //
-        //  "get()" should "return None for unset components" in { mgr =>
-        //    val e = mgr.newEntity()
-        //    mgr.get[SomeComponent](e) should be(None)
-        //  }
-        //
+
+            describe ("its get method") {
+                it ("should return nil for unset components") {
+                    let entity = manager!.newEntity()
+                    expect(manager!.getComponentOfType(SomeComponent.self, forEntity: entity)).to(beNil())
+                }
+            }
+
         //  "has()" should "return true for set components" in { mgr =>
         //    val e = mgr.newEntity()
         //    val c = SomeComponent(0)
@@ -160,7 +153,17 @@ class EntityManagerSpec: QuickSpec {
         //    val e = mgr.newEntity()
         //    mgr.has[SomeComponent](e) should be(false)
         //  }
-        //
+
+            describe ("its remove method") {
+                it ("should remove components") {
+                    let entity = manager!.newEntity()
+                    let component = SomeComponent(0)
+                    manager!.setComponent(component, forEntity: entity)
+                    manager!.removeComponentOfType(SomeComponent.self, forEntity: entity)
+                    expect(manager!.getComponentOfType(SomeComponent.self, forEntity: entity)).to(beNil())
+                }
+            }
+
         //  "remove()" should "return previous value for set component" in { mgr =>
         //    val e = mgr.newEntity()
         //    val c = SomeComponent(0)
