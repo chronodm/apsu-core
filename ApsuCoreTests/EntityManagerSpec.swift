@@ -118,8 +118,10 @@ class EntityManagerSpec: QuickSpec {
 
                     manager!.setComponent(component0, forEntity: entity)
                     manager!.setComponent(component1, forEntity: entity)
-                    expect(manager!.getComponentOfType(SomeComponent.self, forEntity: entity)).to(beIdenticalTo(component0))
-                    expect(manager!.getComponentOfType(OtherComponent.self, forEntity: entity)).to(beIdenticalTo(component1))
+                    let value0 = manager!.getComponentOfType(SomeComponent.self, forEntity: entity)
+                    expect(value0).to(beIdenticalTo(component0))
+                    let value1 = manager!.getComponentOfType(OtherComponent.self, forEntity: entity)
+                    expect(value1).to(beIdenticalTo(component1))
                 }
             }
 
@@ -161,6 +163,20 @@ class EntityManagerSpec: QuickSpec {
                     manager!.setComponent(component, forEntity: entity)
                     manager!.removeComponentOfType(SomeComponent.self, forEntity: entity)
                     expect(manager!.getComponentOfType(SomeComponent.self, forEntity: entity)).to(beNil())
+                }
+
+                it ("should return previous value, if set") {
+                    let entity = manager!.newEntity()
+                    let component = SomeComponent(0)
+                    manager!.setComponent(component, forEntity: entity)
+                    let oldValue = manager!.removeComponentOfType(SomeComponent.self, forEntity: entity)
+                    expect(oldValue).to(beIdenticalTo(component))
+                }
+
+                it ("should return nil for unset components") {
+                    let entity = manager!.newEntity()
+                    let oldValue = manager!.removeComponentOfType(SomeComponent.self, forEntity: entity)
+                    expect(oldValue).to(beNil())
                 }
             }
 

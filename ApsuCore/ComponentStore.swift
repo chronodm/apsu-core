@@ -9,7 +9,7 @@ protocol ComponentStore {
     var count: Int { get }
     var isEmpty: Bool { get }
 
-    mutating func removeComponentFor(entity: Entity)
+    mutating func removeComponentFor(entity: Entity) -> Any?
 }
 
 class TypedComponentStore<T>: ComponentStore, SequenceType {
@@ -51,8 +51,9 @@ class TypedComponentStore<T>: ComponentStore, SequenceType {
         return componentsForEntities[entity]
     }
 
-    func removeComponentFor(entity: Entity) {
-        componentsForEntities.removeValueForKey(entity)
+    // untyped to fit non-generic protocol
+    func removeComponentFor(entity: Entity) -> Any? {
+        return componentsForEntities.removeValueForKey(entity)
     }
 
     // ------------------------------------------------------------

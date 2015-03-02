@@ -60,13 +60,15 @@ public class EntityManager {
         }
     }
 
-    private func removeComponentOfType(type: ComponentTypeKey, forEntity entity: Entity) {
+    private func removeComponentOfType(type: ComponentTypeKey, forEntity entity: Entity) -> Any? {
         if var store = components[type] {
-            store.removeComponentFor(entity)
+            let oldVal = store.removeComponentFor(entity)
             if (store.isEmpty) {
                 components.removeValueForKey(type)
             }
+            return oldVal
         }
+        return nil
     }
 
     // ------------------------------------------------------------
@@ -82,8 +84,8 @@ public class EntityManager {
         store.setComponent(component, forEntity: entity)
     }
 
-    public func removeComponentOfType<T: AnyObject>(type: T.Type, forEntity entity: Entity) {
-        removeComponentOfType(ComponentTypeKey(type), forEntity: entity)
+    public func removeComponentOfType<T: AnyObject>(type: T.Type, forEntity entity: Entity) -> T? {
+        return removeComponentOfType(ComponentTypeKey(type), forEntity: entity) as T?
     }
 
 //    public func allComponentsOfType<T: AnyObject>(type: T.Type) -> SequenceOf<(Entity, T)> {
