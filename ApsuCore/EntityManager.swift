@@ -37,14 +37,14 @@ public class EntityManager {
     }
 
     public func deleteEntity(entity: Entity) {
-        for (var componentMap) in components.values {
-            componentMap.removeComponentFor(entity)
+        for (var componentKey) in components.keys {
+            removeComponentOfType(componentKey, forEntity: entity)
         }
         clearNicknameForEntity(entity)
     }
 
     // ------------------------------------------------------------
-    // MARK: - Component methods
+    // MARK: - Private component methods
 
     private func getComponentStore<T: AnyObject>(forType type: T.Type) -> TypedComponentStore<T>? {
         return components[ComponentTypeKey(type)] as TypedComponentStore<T>?
@@ -60,37 +60,30 @@ public class EntityManager {
         }
     }
 
-    public func getComponentOfType<T: AnyObject>(type: T.Type, entity: Entity) -> T? {
-        return getComponentStore(forType: type)?.getComponentFor(entity)
-//        return components[ComponentTypeKey(type)]?[entity] as T?
+    private func removeComponentOfType(type: ComponentTypeKey, forEntity entity: Entity) {
+        if var store = components[type] {
+            store.removeComponentFor(entity)
+            if (store.isEmpty) {
+                components.removeValueForKey(type)
+            }
+        }
     }
 
-    public func setComponent<T: AnyObject>(component: T, entity: Entity) {
+    // ------------------------------------------------------------
+    // MARK: - Public component methods
+
+    public func getComponentOfType<T: AnyObject>(type: T.Type, forEntity entity: Entity) -> T? {
+        return getComponentStore(forType: type)?.getComponentFor(entity)
+    }
+
+    public func setComponent<T: AnyObject>(component: T, forEntity entity: Entity) {
         let type = T.self
         var store = getOrCreateComponentStore(forType: type)
         store.setComponent(component, forEntity: entity)
-
-//        let type = T.self
-//        if var existingMap = components[ComponentTypeKey(type)] {
-//            existingMap[entity] = component
-//            components[ComponentTypeKey(type)] = existingMap // TODO why
-//        } else {
-//            components[ComponentTypeKey(type)] = [entity:component]
-//        }
     }
 
-    // TODO share code w/deleteEntity
-    public func removeComponentOfType<T: AnyObject>(type: T.Type, entity: Entity) {
-        // TODO should this remove empty maps?
-        if var store = getComponentStore(forType: type) {
-            store.removeComponentFor(entity)
-        }
-
-//        if var m = components[ComponentTypeKey(type)] {
-//            return m.removeValueForKey(entity) as T?
-//        } else {
-//            return nil
-//        }
+    public func removeComponentOfType<T: AnyObject>(type: T.Type, forEntity entity: Entity) {
+        removeComponentOfType(ComponentTypeKey(type), forEntity: entity)
     }
 
 //    public func allComponentsOfType<T: AnyObject>(type: T.Type) -> SequenceOf<(Entity, T)> {
