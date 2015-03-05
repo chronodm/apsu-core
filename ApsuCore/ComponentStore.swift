@@ -51,6 +51,10 @@ class TypedComponentStore<T>: ComponentStore, SequenceType {
         return componentsForEntities[entity]
     }
 
+    func hasComponentFor(entity: Entity) -> Bool {
+        return componentsForEntities[entity] != nil
+    }
+
     // untyped to fit non-generic protocol
     func removeComponentFor(entity: Entity) -> Any? {
         return componentsForEntities.removeValueForKey(entity)

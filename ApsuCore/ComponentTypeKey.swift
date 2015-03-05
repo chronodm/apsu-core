@@ -23,8 +23,3 @@ public class ComponentTypeKey: Hashable {
 public func == (lhs: ComponentTypeKey, rhs: ComponentTypeKey) -> Bool {
     return CFEqual(lhs.type, rhs.type) != 0
 }
-
-//public func componentKeyFor<T: AnyObject>(type: T.Type) -> ComponentKey {
-//    return ComponentKey(type: type)
-//}
-

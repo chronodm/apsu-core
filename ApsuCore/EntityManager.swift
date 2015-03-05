@@ -21,7 +21,8 @@ public class EntityManager {
     // ------------------------------------------------------------
     // MARK: - Initializers
 
-    public init() {}
+    public init() {
+    }
 
     // ------------------------------------------------------------
     // MARK: - Entity methods
@@ -37,7 +38,8 @@ public class EntityManager {
     }
 
     public func deleteEntity(entity: Entity) {
-        for (var componentKey) in components.keys {
+        let keys = components.keys
+        for (var componentKey) in keys {
             removeComponentOfType(componentKey, forEntity: entity)
         }
         clearNicknameForEntity(entity)
@@ -46,18 +48,17 @@ public class EntityManager {
     // ------------------------------------------------------------
     // MARK: - Private component methods
 
-    private func getComponentStore<T: AnyObject>(forType type: T.Type) -> TypedComponentStore<T>? {
+    private func getComponentStore<T:AnyObject>(forType type: T.Type) -> TypedComponentStore<T>? {
         return components[ComponentTypeKey(type)] as TypedComponentStore<T>?
     }
 
-    private func getOrCreateComponentStore<T: AnyObject>(forType type: T.Type) -> TypedComponentStore<T> {
+    private func getOrCreateComponentStore<T:AnyObject>(forType type: T.Type) -> TypedComponentStore<T> {
         if var store = getComponentStore(forType: type) {
             return store
-        } else {
-            var store = TypedComponentStore<T>()
-            components[ComponentTypeKey(type)] = store
-            return store
         }
+        var store = TypedComponentStore<T>()
+        components[ComponentTypeKey(type)] = store
+        return store
     }
 
     private func removeComponentOfType(type: ComponentTypeKey, forEntity entity: Entity) -> Any? {
@@ -74,18 +75,25 @@ public class EntityManager {
     // ------------------------------------------------------------
     // MARK: - Public component methods
 
-    public func getComponentOfType<T: AnyObject>(type: T.Type, forEntity entity: Entity) -> T? {
+    public func getComponentOfType<T:AnyObject>(type: T.Type, forEntity entity: Entity) -> T? {
         return getComponentStore(forType: type)?.getComponentFor(entity)
     }
 
-    public func setComponent<T: AnyObject>(component: T, forEntity entity: Entity) {
+    public func setComponent<T:AnyObject>(component: T, forEntity entity: Entity) {
         let type = T.self
         var store = getOrCreateComponentStore(forType: type)
         store.setComponent(component, forEntity: entity)
     }
 
-    public func removeComponentOfType<T: AnyObject>(type: T.Type, forEntity entity: Entity) -> T? {
+    public func removeComponentOfType<T:AnyObject>(type: T.Type, forEntity entity: Entity) -> T? {
         return removeComponentOfType(ComponentTypeKey(type), forEntity: entity) as T?
+    }
+
+    public func hasComponentOfType<T:AnyObject>(type: T.Type, forEntity entity: Entity) -> Bool {
+        if var store = getComponentStore(forType: type) {
+            return store.hasComponentFor(entity)
+        }
+        return false
     }
 
 //    public func allComponentsOfType<T: AnyObject>(type: T.Type) -> SequenceOf<(Entity, T)> {
