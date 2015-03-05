@@ -13,16 +13,16 @@ import Nimble
 class EntityManagerSpec: QuickSpec {
     override func spec() {
         describe("an entity manager") {
-            var manager: EntityManager?
+            var mgr: EntityManager?
 
-            beforeEach { manager = EntityManager() }
+            beforeEach { mgr = EntityManager() }
 
             // ------------------------------
             // MARK: - Entity creation
 
             it ("should create a unique entity each time") {
-                let e1 = manager!.newEntity()
-                let e2 = manager!.newEntity()
+                let e1 = mgr!.newEntity()
+                let e2 = mgr!.newEntity()
                 expect(e1).notTo(equal(e2))
             }
 
@@ -30,98 +30,125 @@ class EntityManagerSpec: QuickSpec {
             // MARK: - Nicknames
 
             it ("should not require nicknames") {
-                let e = manager!.newEntity()
-                expect(manager!.getNicknameForEntity(e)).to(beNil())
+                let e = mgr!.newEntity()
+                expect(mgr!.getNicknameForEntity(e)).to(beNil())
             }
 
             it ("should allow you to set a nickname at entity creation") {
                 let nickname = "I am a nickname"
-                let e = manager!.newEntityWithNickname(nickname)
-                expect(manager!.getNicknameForEntity(e)).to(equal(nickname))
+                let e = mgr!.newEntityWithNickname(nickname)
+                expect(mgr!.getNicknameForEntity(e)).to(equal(nickname))
             }
 
             it ("should allow you to set a nickname after entity creation") {
-                let e = manager!.newEntity()
+                let e = mgr!.newEntity()
                 let nickname = "I am a nickname"
-                manager!.setNicknameForEntity(e, nickname: nickname)
-                expect(manager!.getNicknameForEntity(e)).to(equal(nickname))
+                mgr!.setNicknameForEntity(e, nickname: nickname)
+                expect(mgr!.getNicknameForEntity(e)).to(equal(nickname))
             }
 
             it ("should allow you to change a nickname") {
-                let e = manager!.newEntityWithNickname("Elvis")
-                manager!.setNicknameForEntity(e, nickname: "Priscilla")
-                expect(manager!.getNicknameForEntity(e)).to(equal("Priscilla"))
+                let e = mgr!.newEntityWithNickname("Elvis")
+                mgr!.setNicknameForEntity(e, nickname: "Priscilla")
+                expect(mgr!.getNicknameForEntity(e)).to(equal("Priscilla"))
             }
 
             it ("should free an old nickname when you change it") {
-                let e1 = manager!.newEntityWithNickname("Elvis")
-                manager!.setNicknameForEntity(e1, nickname: "Priscilla")
-                let e2 = manager!.newEntityWithNickname("Elvis")
-                expect(manager!.getNicknameForEntity(e2)).to(equal("Elvis"))
+                let e1 = mgr!.newEntityWithNickname("Elvis")
+                mgr!.setNicknameForEntity(e1, nickname: "Priscilla")
+                let e2 = mgr!.newEntityWithNickname("Elvis")
+                expect(mgr!.getNicknameForEntity(e2)).to(equal("Elvis"))
             }
 
             it ("should not allow setting a duplicate nickname at creation time") {
                 let nickname = "I am a nickname"
-                let e1 = manager!.newEntityWithNickname(nickname)
-                expect({ manager!.newEntityWithNickname("I am a nickname")}).to(raiseException(named:Exceptions.DuplicateNameException))
-                expect(manager!.getNicknameForEntity(e1)).to(equal(nickname))
+                let e1 = mgr!.newEntityWithNickname(nickname)
+                expect({ mgr!.newEntityWithNickname("I am a nickname")}).to(raiseException(named:Exceptions.DuplicateNameException))
+                expect(mgr!.getNicknameForEntity(e1)).to(equal(nickname))
             }
 
             it ("should not allow setting a duplicate nickname after creation time") {
                 let nickname = "I am a nickname"
-                let e1 = manager!.newEntityWithNickname(nickname)
-                let e2 = manager!.newEntity()
-                expect({ manager!.setNicknameForEntity(e2, nickname:"I am a nickname")}).to(raiseException(named:Exceptions.DuplicateNameException))
-                expect(manager!.getNicknameForEntity(e1)).to(equal(nickname))
-                expect(manager!.getNicknameForEntity(e2)).to(beNil())
+                let e1 = mgr!.newEntityWithNickname(nickname)
+                let e2 = mgr!.newEntity()
+                expect({ mgr!.setNicknameForEntity(e2, nickname:"I am a nickname")}).to(raiseException(named:Exceptions.DuplicateNameException))
+                expect(mgr!.getNicknameForEntity(e1)).to(equal(nickname))
+                expect(mgr!.getNicknameForEntity(e2)).to(beNil())
             }
 
             it ("should allow clearing a nickname") {
                 let nickname = "I am a nickname"
-                let e1 = manager!.newEntityWithNickname(nickname)
-                let oldNickname = manager!.clearNicknameForEntity(e1)
+                let e1 = mgr!.newEntityWithNickname(nickname)
+                let oldNickname = mgr!.clearNicknameForEntity(e1)
                 expect(oldNickname).to(equal(nickname))
-                expect(manager!.getNicknameForEntity(e1)).to(beNil())
+                expect(mgr!.getNicknameForEntity(e1)).to(beNil())
             }
 
             // TODO test that delete (1) removes components and (2) frees nickname
+
+//            // ------------------------------------------------------------
+//            // delete()
+//
+//            "delete()" should "delete all components" in { mgr =>
+//                    val e = mgr.newEntity()
+//                val c0 = SomeComponent(0)
+//                val c1 = OtherComponent(1)
+//
+//                mgr.set(e, c0)
+//                mgr.set(e, c1)
+//
+//                mgr.delete(e)
+//
+//                mgr.has[SomeComponent](e) should be(false)
+//                mgr.has[OtherComponent](e) should be(false)
+//
+//                mgr.all[SomeComponent] should be(empty)
+//                mgr.all[OtherComponent] should be(empty)
+//            }
+//
+//            it should "clear nicknames" in { mgr =>
+//                    val nn = "nickname"
+//                val e = mgr.newEntity(nn)
+//                mgr.delete(e)
+//                mgr.getNickname(e) should be(None)
+//            }
 
             // ------------------------------
             // MARK: - Components
 
             describe ("its set/get methods") {
                 it ("should set/get a component") {
-                    let entity = manager!.newEntity()
-                    let component = SomeComponent(0)
-                    manager!.setComponent(component, forEntity: entity)
-                    expect(manager!.getComponentOfType(SomeComponent.self, forEntity: entity)).to(beIdenticalTo(component))
+                    let e = mgr!.newEntity()
+                    let c = SomeComponent(0)
+                    mgr!.setComponent(c, forEntity: e)
+                    expect(mgr!.getComponentOfType(SomeComponent.self, forEntity: e)).to(beIdenticalTo(c))
                 }
             }
 
             describe ("its set method") {
                 it ("should replace existing components") {
-                    let entity = manager!.newEntity()
-                    let component0 = SomeComponent(0)
-                    let component1 = SomeComponent(1)
+                    let e = mgr!.newEntity()
+                    let c0 = SomeComponent(0)
+                    let c1 = SomeComponent(1)
 
-                    manager!.setComponent(component0, forEntity: entity)
-                    manager!.setComponent(component1, forEntity: entity)
+                    mgr!.setComponent(c0, forEntity: e)
+                    mgr!.setComponent(c1, forEntity: e)
 
-                    let actual = manager!.getComponentOfType(SomeComponent.self, forEntity: entity)
-                    expect(actual).to(beIdenticalTo(component1))
+                    let actual = mgr!.getComponentOfType(SomeComponent.self, forEntity: e)
+                    expect(actual).to(beIdenticalTo(c1))
                 }
 
                 it ("should support components of multiple types on an entity") {
-                    let entity = manager!.newEntity()
-                    let component0 = SomeComponent(0)
-                    let component1 = OtherComponent(1)
+                    let e = mgr!.newEntity()
+                    let c0 = SomeComponent(0)
+                    let c1 = OtherComponent(1)
 
-                    manager!.setComponent(component0, forEntity: entity)
-                    manager!.setComponent(component1, forEntity: entity)
-                    let value0 = manager!.getComponentOfType(SomeComponent.self, forEntity: entity)
-                    expect(value0).to(beIdenticalTo(component0))
-                    let value1 = manager!.getComponentOfType(OtherComponent.self, forEntity: entity)
-                    expect(value1).to(beIdenticalTo(component1))
+                    mgr!.setComponent(c0, forEntity: e)
+                    mgr!.setComponent(c1, forEntity: e)
+                    let value0 = mgr!.getComponentOfType(SomeComponent.self, forEntity: e)
+                    expect(value0).to(beIdenticalTo(c0))
+                    let value1 = mgr!.getComponentOfType(OtherComponent.self, forEntity: e)
+                    expect(value1).to(beIdenticalTo(c1))
                 }
             }
 
@@ -138,8 +165,8 @@ class EntityManagerSpec: QuickSpec {
 
             describe ("its get method") {
                 it ("should return nil for unset components") {
-                    let entity = manager!.newEntity()
-                    expect(manager!.getComponentOfType(SomeComponent.self, forEntity: entity)).to(beNil())
+                    let e = mgr!.newEntity()
+                    expect(mgr!.getComponentOfType(SomeComponent.self, forEntity: e)).to(beNil())
                 }
             }
 
@@ -158,40 +185,124 @@ class EntityManagerSpec: QuickSpec {
 
             describe ("its remove method") {
                 it ("should remove components") {
-                    let entity = manager!.newEntity()
-                    let component = SomeComponent(0)
-                    manager!.setComponent(component, forEntity: entity)
-                    manager!.removeComponentOfType(SomeComponent.self, forEntity: entity)
-                    expect(manager!.getComponentOfType(SomeComponent.self, forEntity: entity)).to(beNil())
+                    let e = mgr!.newEntity()
+                    let c = SomeComponent(0)
+                    mgr!.setComponent(c, forEntity: e)
+                    mgr!.removeComponentOfType(SomeComponent.self, forEntity: e)
+                    expect(mgr!.getComponentOfType(SomeComponent.self, forEntity: e)).to(beNil())
                 }
 
                 it ("should return previous value, if set") {
-                    let entity = manager!.newEntity()
-                    let component = SomeComponent(0)
-                    manager!.setComponent(component, forEntity: entity)
-                    let oldValue = manager!.removeComponentOfType(SomeComponent.self, forEntity: entity)
-                    expect(oldValue).to(beIdenticalTo(component))
+                    let e = mgr!.newEntity()
+                    let c = SomeComponent(0)
+                    mgr!.setComponent(c, forEntity: e)
+                    let oldValue = mgr!.removeComponentOfType(SomeComponent.self, forEntity: e)
+                    expect(oldValue).to(beIdenticalTo(c))
                 }
 
                 it ("should return nil for unset components") {
-                    let entity = manager!.newEntity()
-                    let oldValue = manager!.removeComponentOfType(SomeComponent.self, forEntity: entity)
+                    let e = mgr!.newEntity()
+                    let oldValue = mgr!.removeComponentOfType(SomeComponent.self, forEntity: e)
                     expect(oldValue).to(beNil())
                 }
             }
-
-        //  "remove()" should "return previous value for set component" in { mgr =>
-        //    val e = mgr.newEntity()
-        //    val c = SomeComponent(0)
-        //
-        //    mgr.set(e, c)
-        //    mgr.remove[SomeComponent](e) should be(Some(c))
-        //  }
-        //
-        //  it should "return None for unset components" in { mgr =>
-        //    val e = mgr.newEntity()
-        //    mgr.remove[SomeComponent](e) should be(None)
-        //  }
+            
+//            describe ("its allComponentsOfType method") {
+//                it ("should return all and only entities with specified component type") {
+//                    let e0 = mgr!.newEntity()
+//                }
+//            }
+            
+//            // ------------------------------------------------------------
+//            // all()
+//
+//            "all()" should "return all and only entities with specified component type" in { mgr =>
+//                    val e0 = mgr.newEntity()
+//                val e1 = mgr.newEntity()
+//                val e2 = mgr.newEntity()
+//                val sc0 = SomeComponent(0)
+//                val sc1 = SomeComponent(1)
+//                val oc2 = OtherComponent(2)
+//
+//                mgr.set(e0, sc0)
+//                mgr.set(e1, sc1)
+//                mgr.set(e2, oc2)
+//
+//                mgr.all[SomeComponent].toStream should contain only((e0, sc0), (e1, sc1))
+//                mgr.all[OtherComponent].toStream should contain only ((e2, oc2))
+//            }
+//
+//            // ------------------------------------------------------------
+//            // forAll()
+//
+//            "forAll()" should "return result for all and only entities with specified component type" in { mgr =>
+//                    val e0 = mgr.newEntity()
+//                val e1 = mgr.newEntity()
+//                val e2 = mgr.newEntity()
+//                val sc0 = SomeComponent(0)
+//                val sc1 = SomeComponent(1)
+//                val oc2 = OtherComponent(2)
+//
+//                mgr.set(e0, sc0)
+//                mgr.set(e1, sc1)
+//                mgr.set(e2, oc2)
+//
+//                def f0(e: Entity, c: SomeComponent) = {
+//                    s"$e $c"
+//                }
+//
+//                def f1(e: Entity, c: OtherComponent) = {
+//                    s"$e $c"
+//                }
+//
+//                mgr.forAll[SomeComponent, String](f0).toStream should contain only(s"$e0 $sc0", s"$e1 $sc1")
+//                mgr.forAll[OtherComponent, String](f1).toStream should contain only s"$e2 $oc2"
+//            }
+//
+//            "forAll()" should "execute on all and only entities with specified component type" in { mgr =>
+//                    val e0 = mgr.newEntity()
+//                val e1 = mgr.newEntity()
+//                val e2 = mgr.newEntity()
+//                val sc0 = SomeComponent(0)
+//                val sc1 = SomeComponent(1)
+//                val oc2 = OtherComponent(2)
+//
+//                mgr.set(e0, sc0)
+//                mgr.set(e1, sc1)
+//                mgr.set(e2, oc2)
+//
+//                val f0: (Entity, SomeComponent) => Unit = mock[(Entity, SomeComponent) => Unit]
+//                val f1: (Entity, OtherComponent) => Unit = mock[(Entity, OtherComponent) => Unit]
+//
+//                mgr.forAll[SomeComponent](f0)
+//                mgr.forAll[OtherComponent](f1)
+//
+//                verify(f0).apply(e0, sc0)
+//                verify(f0).apply(e1, sc1)
+//                verifyNoMoreInteractions(f0)
+//
+//                verify(f1).apply(e2, oc2)
+//                verifyNoMoreInteractions(f1)
+//            }
+//
+//            // ------------------------------------------------------------
+//            // allComponents
+//
+//            "allComponents" should "return all components for an entity" in { mgr =>
+//                    val e = mgr.newEntity()
+//                val c0 = SomeComponent(0)
+//                val c1 = OtherComponent(0)
+//
+//                mgr.set(e, c0)
+//                mgr.set(e, c1)
+//
+//                mgr.allComponents(e).toStream should contain only(c0, c1)
+//            }
+//
+//            it should "return an empty iterator for entities with no components" in { mgr =>
+//                    val e = mgr.newEntity()
+//                mgr.allComponents(e).toStream shouldBe empty
+//            }
 
         }
     }
