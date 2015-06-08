@@ -215,11 +215,21 @@ class EntityManagerSpec: QuickSpec {
                 }
             }
 
-//            describe ("its allComponentsOfType method") {
-//                it ("should return all and only entities with specified component type") {
-//                    let e0 = mgr!.newEntity()
-//                }
-//            }
+            describe ("its allComponentsOfType method") {
+                it ("should return all and only entities with specified component type") {
+                    let e0 = mgr!.newEntity()
+                    let e2 = mgr!.newEntity()
+                    let sc0 = SomeComponent(0)
+                    let sc1 = SomeComponent(1)
+                    let oc2 = OtherComponent(2)
+
+                    mgr!.setComponent(sc0, forEntity: e0)
+                    mgr!.setComponent(sc1, forEntity: e1)
+                    mgr!.setComponent(oc2, forEntity: e2)
+
+                    mgr!.allComponentsOfType
+                }
+            }
 
 //            // ------------------------------------------------------------
 //            // all()
