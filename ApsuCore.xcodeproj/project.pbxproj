@@ -15,47 +15,46 @@
 		63C19D4219673E710055B3F1 /* ApsuCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C19D3619673E710055B3F1 /* ApsuCore.framework */; };
 		63C19D53196740220055B3F1 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C19D52196740220055B3F1 /* Entity.swift */; };
 		63C19D57196751FE0055B3F1 /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C19D56196751FE0055B3F1 /* EntityManager.swift */; };
-		63F3F14D1A9966B7007BF513 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63F3F1381A99665B007BF513 /* Nimble.framework */; };
 		63F3F14E1A9966B7007BF513 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63F3F1421A99665B007BF513 /* Quick.framework */; };
 		63F3F1501A996789007BF513 /* EntitySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F3F14F1A996789007BF513 /* EntitySpec.swift */; };
 		63F3F1621A99941E007BF513 /* CFUUIDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F3F1611A99941E007BF513 /* CFUUIDExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		632DABD01B2651D70064FE34 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 632DABC91B2651D70064FE34 /* Nimble.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1F1A74291940169200FFFC47;
+			remoteInfo = "Nimble-iOS";
+		};
+		632DABD21B2651D70064FE34 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 632DABC91B2651D70064FE34 /* Nimble.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1F1A74341940169200FFFC47;
+			remoteInfo = "Nimble-iOSTests";
+		};
+		632DABD41B2651D70064FE34 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 632DABC91B2651D70064FE34 /* Nimble.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1F925EAD195C0D6300ED456B;
+			remoteInfo = "Nimble-OSX";
+		};
+		632DABD61B2651D70064FE34 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 632DABC91B2651D70064FE34 /* Nimble.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1F925EB7195C0D6300ED456B;
+			remoteInfo = "Nimble-OSXTests";
+		};
 		63C19D4319673E710055B3F1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 63C19D2D19673E710055B3F1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 63C19D3519673E710055B3F1;
 			remoteInfo = ApsuCore;
-		};
-		63F3F1331A99665B007BF513 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 63F3F1291A99665B007BF513 /* Nimble.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1F1A74291940169200FFFC47;
-			remoteInfo = "Nimble-iOS";
-		};
-		63F3F1351A99665B007BF513 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 63F3F1291A99665B007BF513 /* Nimble.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1F1A74341940169200FFFC47;
-			remoteInfo = "Nimble-iOSTests";
-		};
-		63F3F1371A99665B007BF513 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 63F3F1291A99665B007BF513 /* Nimble.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1F925EAD195C0D6300ED456B;
-			remoteInfo = "Nimble-OSX";
-		};
-		63F3F1391A99665B007BF513 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 63F3F1291A99665B007BF513 /* Nimble.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1F925EB7195C0D6300ED456B;
-			remoteInfo = "Nimble-OSXTests";
 		};
 		63F3F1411A99665B007BF513 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -105,6 +104,7 @@
 		5AF0E122A723489EBB832B76 /* ComponentStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentStore.swift; sourceTree = "<group>"; };
 		5AF0E88C5ED917CFF0070725 /* Exceptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exceptions.swift; sourceTree = "<group>"; };
 		5AF0E9F30A970092DA28A9EE /* ComponentTypeKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentTypeKey.swift; sourceTree = "<group>"; };
+		632DABC91B2651D70064FE34 /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = Vendor/Quick/Externals/Nimble/Nimble.xcodeproj; sourceTree = SOURCE_ROOT; };
 		63B0D2371AA22E760051B047 /* EntityManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityManagerSpec.swift; sourceTree = "<group>"; };
 		63C19D3619673E710055B3F1 /* ApsuCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ApsuCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63C19D3A19673E710055B3F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -113,7 +113,6 @@
 		63C19D4719673E710055B3F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63C19D52196740220055B3F1 /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		63C19D56196751FE0055B3F1 /* EntityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
-		63F3F1291A99665B007BF513 /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = Vendor/Nimble/Nimble.xcodeproj; sourceTree = SOURCE_ROOT; };
 		63F3F12C1A99665B007BF513 /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = Vendor/Quick/Quick.xcodeproj; sourceTree = SOURCE_ROOT; };
 		63F3F14F1A996789007BF513 /* EntitySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntitySpec.swift; sourceTree = "<group>"; };
 		63F3F1611A99941E007BF513 /* CFUUIDExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CFUUIDExtensions.swift; sourceTree = "<group>"; };
@@ -131,7 +130,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63F3F14D1A9966B7007BF513 /* Nimble.framework in Frameworks */,
 				63F3F14E1A9966B7007BF513 /* Quick.framework in Frameworks */,
 				63C19D4219673E710055B3F1 /* ApsuCore.framework in Frameworks */,
 			);
@@ -140,6 +138,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		632DABCA1B2651D70064FE34 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				632DABD11B2651D70064FE34 /* Nimble.framework */,
+				632DABD31B2651D70064FE34 /* NimbleTests.xctest */,
+				632DABD51B2651D70064FE34 /* Nimble.framework */,
+				632DABD71B2651D70064FE34 /* NimbleTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		63B0D25D1AA397FB0051B047 /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,8 +201,7 @@
 		63C19D4519673E710055B3F1 /* ApsuCoreTests */ = {
 			isa = PBXGroup;
 			children = (
-				63B0D2371AA22E760051B047 /* EntityManagerSpec.swift */,
-				63F3F1291A99665B007BF513 /* Nimble.xcodeproj */,
+				632DABC91B2651D70064FE34 /* Nimble.xcodeproj */,
 				63F3F12C1A99665B007BF513 /* Quick.xcodeproj */,
 				63C19D4619673E710055B3F1 /* Supporting Files */,
 				63F3F14F1A996789007BF513 /* EntitySpec.swift */,
@@ -204,20 +212,10 @@
 		63C19D4619673E710055B3F1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				63B0D2371AA22E760051B047 /* EntityManagerSpec.swift */,
 				63C19D4719673E710055B3F1 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		63F3F12A1A99665B007BF513 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				63F3F1341A99665B007BF513 /* Nimble.framework */,
-				63F3F1361A99665B007BF513 /* NimbleTests.xctest */,
-				63F3F1381A99665B007BF513 /* Nimble.framework */,
-				63F3F13A1A99665B007BF513 /* NimbleTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		63F3F12D1A99665B007BF513 /* Products */ = {
@@ -289,7 +287,8 @@
 		63C19D2D19673E710055B3F1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "David Moles";
 				TargetAttributes = {
 					63C19D3519673E710055B3F1 = {
@@ -313,8 +312,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 63F3F12A1A99665B007BF513 /* Products */;
-					ProjectRef = 63F3F1291A99665B007BF513 /* Nimble.xcodeproj */;
+					ProductGroup = 632DABCA1B2651D70064FE34 /* Products */;
+					ProjectRef = 632DABC91B2651D70064FE34 /* Nimble.xcodeproj */;
 				},
 				{
 					ProductGroup = 63F3F12D1A99665B007BF513 /* Products */;
@@ -330,32 +329,32 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		63F3F1341A99665B007BF513 /* Nimble.framework */ = {
+		632DABD11B2651D70064FE34 /* Nimble.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Nimble.framework;
-			remoteRef = 63F3F1331A99665B007BF513 /* PBXContainerItemProxy */;
+			remoteRef = 632DABD01B2651D70064FE34 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		63F3F1361A99665B007BF513 /* NimbleTests.xctest */ = {
+		632DABD31B2651D70064FE34 /* NimbleTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = NimbleTests.xctest;
-			remoteRef = 63F3F1351A99665B007BF513 /* PBXContainerItemProxy */;
+			remoteRef = 632DABD21B2651D70064FE34 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		63F3F1381A99665B007BF513 /* Nimble.framework */ = {
+		632DABD51B2651D70064FE34 /* Nimble.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Nimble.framework;
-			remoteRef = 63F3F1371A99665B007BF513 /* PBXContainerItemProxy */;
+			remoteRef = 632DABD41B2651D70064FE34 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		63F3F13A1A99665B007BF513 /* NimbleTests.xctest */ = {
+		632DABD71B2651D70064FE34 /* NimbleTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = NimbleTests.xctest;
-			remoteRef = 63F3F1391A99665B007BF513 /* PBXContainerItemProxy */;
+			remoteRef = 632DABD61B2651D70064FE34 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		63F3F1421A99665B007BF513 /* Quick.framework */ = {
@@ -473,6 +472,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -547,6 +547,7 @@
 				INFOPLIST_FILE = ApsuCore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dmoles.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -566,6 +567,7 @@
 				INFOPLIST_FILE = ApsuCore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dmoles.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -586,6 +588,7 @@
 				INFOPLIST_FILE = ApsuCoreTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dmoles.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -601,6 +604,7 @@
 				INFOPLIST_FILE = ApsuCoreTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dmoles.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

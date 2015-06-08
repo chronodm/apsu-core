@@ -14,7 +14,7 @@ public struct Entity: Hashable, CustomStringConvertible {
     public let hashValue: Int
     public var description: String {
         get {
-            let idString: String = CFUUIDCreateString(nil, id)
+            let idString = CFUUIDCreateString(nil, id) as String
             return "Entity(\(idString))"
         }
     }

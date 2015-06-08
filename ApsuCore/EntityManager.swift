@@ -39,7 +39,7 @@ public class EntityManager {
 
     public func deleteEntity(entity: Entity) {
         let keys = components.keys
-        for (var componentKey) in keys {
+        for componentKey in keys {
             removeComponentOfType(componentKey, forEntity: entity)
         }
         clearNicknameForEntity(entity)
@@ -49,7 +49,7 @@ public class EntityManager {
     // MARK: - Private component methods
 
     private func getComponentStore<T:AnyObject>(forType type: T.Type) -> TypedComponentStore<T>? {
-        return components[ComponentTypeKey(type)] as TypedComponentStore<T>?
+        return components[ComponentTypeKey(type)] as? TypedComponentStore<T>
     }
 
     private func getOrCreateComponentStore<T:AnyObject>(forType type: T.Type) -> TypedComponentStore<T> {
@@ -62,7 +62,7 @@ public class EntityManager {
     }
 
     private func removeComponentOfType(type: ComponentTypeKey, forEntity entity: Entity) -> Any? {
-        if let store = components[type] {
+        if var store: ComponentStore = components[type] {
             let oldVal = store.removeComponentFor(entity)
             if (store.isEmpty) {
                 components.removeValueForKey(type)
@@ -118,7 +118,7 @@ public class EntityManager {
     }
 
     public func setNicknameForEntity(e: Entity, nickname: String) -> String? {
-        if let other = nicknamesReverse[nickname] {
+        if nicknamesReverse[nickname] != nil {
             NSException(name: Exceptions.DuplicateNameException, reason: "An entity with the nickname \(nickname) already exists", userInfo: nil).raise()
             return nil
         }
