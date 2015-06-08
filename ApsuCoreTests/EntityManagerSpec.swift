@@ -326,7 +326,7 @@ class EntityManagerSpec: QuickSpec {
     }
 }
 
-private class SomeComponent: Printable {
+private class SomeComponent: CustomStringConvertible {
     let id: Int
     let description: String
     private init(_ id: Int) {
@@ -335,7 +335,7 @@ private class SomeComponent: Printable {
     }
 }
 
-private class OtherComponent: Printable {
+private class OtherComponent: CustomStringConvertible {
     let id: Int
     let description: String
     private init(_ id: Int) {

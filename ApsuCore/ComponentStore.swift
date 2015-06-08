@@ -63,7 +63,7 @@ class TypedComponentStore<T>: ComponentStore, SequenceType {
     // ------------------------------------------------------------
     // SequenceType
 
-    func generate() -> GeneratorOf<(Entity, T)> {
-        return GeneratorOf(componentsForEntities.generate())
+    func generate() -> AnyGenerator<(Entity, T)> {
+        return anyGenerator(componentsForEntities.generate())
     }
 }

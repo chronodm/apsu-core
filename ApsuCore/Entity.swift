@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 David Moles. All rights reserved.
 //
 
-public struct Entity: Hashable, Printable {
+public struct Entity: Hashable, CustomStringConvertible {
     // ------------------------------------------------------------
     // MARK: - Fields
 

@@ -53,16 +53,16 @@ public class EntityManager {
     }
 
     private func getOrCreateComponentStore<T:AnyObject>(forType type: T.Type) -> TypedComponentStore<T> {
-        if var store = getComponentStore(forType: type) {
+        if let store = getComponentStore(forType: type) {
             return store
         }
-        var store = TypedComponentStore<T>()
+        let store = TypedComponentStore<T>()
         components[ComponentTypeKey(type)] = store
         return store
     }
 
     private func removeComponentOfType(type: ComponentTypeKey, forEntity entity: Entity) -> Any? {
-        if var store = components[type] {
+        if let store = components[type] {
             let oldVal = store.removeComponentFor(entity)
             if (store.isEmpty) {
                 components.removeValueForKey(type)
@@ -81,16 +81,16 @@ public class EntityManager {
 
     public func setComponent<T:AnyObject>(component: T, forEntity entity: Entity) {
         let type = T.self
-        var store = getOrCreateComponentStore(forType: type)
+        let store = getOrCreateComponentStore(forType: type)
         store.setComponent(component, forEntity: entity)
     }
 
     public func removeComponentOfType<T:AnyObject>(type: T.Type, forEntity entity: Entity) -> T? {
-        return removeComponentOfType(ComponentTypeKey(type), forEntity: entity) as T?
+        return removeComponentOfType(ComponentTypeKey(type), forEntity: entity) as! T?
     }
 
     public func hasComponentOfType<T:AnyObject>(type: T.Type, forEntity entity: Entity) -> Bool {
-        if var store = getComponentStore(forType: type) {
+        if let store = getComponentStore(forType: type) {
             return store.hasComponentFor(entity)
         }
         return false
