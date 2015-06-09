@@ -19,15 +19,15 @@ class EntitySpec: QuickSpec {
                 let count = 5000
 
                 var timesSeconds = [Double]()
-                for i in 0..<runs {
+                for _ in 0..<runs {
                     let startSeconds = CFAbsoluteTimeGetCurrent()
-                    for j in 0..<count {
+                    for _ in 0..<count {
                         Entity()
                     }
                     let timeSeconds = CFAbsoluteTimeGetCurrent() - startSeconds
                     timesSeconds.append(timeSeconds)
                 }
-                timesSeconds.sort { $0 < $1 }
+                timesSeconds.sortInPlace { $0 < $1 }
                 let medianSeconds = timesSeconds[runs / 2] / Double(count)
                 let median_μs = medianSeconds * 1e6
 //                println(medianμs)
@@ -58,7 +58,7 @@ class EntitySpec: QuickSpec {
                     let e2 = Entity()
                     let id1 = e1.id
                     let id2 = e2.id
-                    expect(e1.id).notTo(equal(e2.id))
+                    expect(id1).notTo(equal(id2))
                 }
             }
 

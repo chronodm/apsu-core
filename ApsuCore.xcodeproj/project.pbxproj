@@ -10,6 +10,7 @@
 		5AF0E758702840B326CC7D52 /* ComponentTypeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF0E9F30A970092DA28A9EE /* ComponentTypeKey.swift */; };
 		5AF0ED33633E192A7997BFA5 /* Exceptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF0E88C5ED917CFF0070725 /* Exceptions.swift */; };
 		5AF0EFEBD88BB85EE6F1A2C1 /* ComponentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF0E122A723489EBB832B76 /* ComponentStore.swift */; };
+		632DABD81B26765B0064FE34 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 632DABD51B2651D70064FE34 /* Nimble.framework */; };
 		63B0D2381AA22E760051B047 /* EntityManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B0D2371AA22E760051B047 /* EntityManagerSpec.swift */; };
 		63C19D3C19673E710055B3F1 /* ApsuCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 63C19D3B19673E710055B3F1 /* ApsuCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		63C19D4219673E710055B3F1 /* ApsuCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C19D3619673E710055B3F1 /* ApsuCore.framework */; };
@@ -130,6 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				632DABD81B26765B0064FE34 /* Nimble.framework in Frameworks */,
 				63F3F14E1A9966B7007BF513 /* Quick.framework in Frameworks */,
 				63C19D4219673E710055B3F1 /* ApsuCore.framework in Frameworks */,
 			);

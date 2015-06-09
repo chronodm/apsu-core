@@ -8,7 +8,7 @@
 
 import ApsuCore
 import Quick
-import Nimble
+ import Nimble
 
 class EntityManagerSpec: QuickSpec {
     override func spec() {
@@ -66,7 +66,7 @@ class EntityManagerSpec: QuickSpec {
                 it("should not allow setting a duplicate nickname at creation time") {
                     let nickname = "I am a nickname"
                     let e1 = mgr!.newEntityWithNickname(nickname)
-                    expect({ mgr!.newEntityWithNickname("I am a nickname") }).to(raiseException(named: Exceptions.DuplicateNameException))
+                    expect({ mgr!.newEntityWithNickname("I am a nickname") }()).to(raiseException(named: Exceptions.DuplicateNameException))
                     expect(mgr!.getNicknameForEntity(e1)).to(equal(nickname))
                 }
 
@@ -74,7 +74,7 @@ class EntityManagerSpec: QuickSpec {
                     let nickname = "I am a nickname"
                     let e1 = mgr!.newEntityWithNickname(nickname)
                     let e2 = mgr!.newEntity()
-                    expect({ mgr!.setNicknameForEntity(e2, nickname: "I am a nickname") }).to(raiseException(named: Exceptions.DuplicateNameException))
+                    expect({ mgr!.setNicknameForEntity(e2, nickname: "I am a nickname") }()).to(raiseException(named: Exceptions.DuplicateNameException))
                     expect(mgr!.getNicknameForEntity(e1)).to(equal(nickname))
                     expect(mgr!.getNicknameForEntity(e2)).to(beNil())
                 }
@@ -215,21 +215,22 @@ class EntityManagerSpec: QuickSpec {
                 }
             }
 
-            describe ("its allComponentsOfType method") {
-                it ("should return all and only entities with specified component type") {
-                    let e0 = mgr!.newEntity()
-                    let e2 = mgr!.newEntity()
-                    let sc0 = SomeComponent(0)
-                    let sc1 = SomeComponent(1)
-                    let oc2 = OtherComponent(2)
-
-                    mgr!.setComponent(sc0, forEntity: e0)
-                    mgr!.setComponent(sc1, forEntity: e1)
-                    mgr!.setComponent(oc2, forEntity: e2)
-
-                    mgr!.allComponentsOfType
-                }
-            }
+//            describe ("its allComponentsOfType method") {
+//                it ("should return all and only entities with specified component type") {
+//                    let e0 = mgr!.newEntity()
+//                    let e1 = mgr!.newEntity()
+//                    let e2 = mgr!.newEntity()
+//                    let sc0 = SomeComponent(0)
+//                    let sc1 = SomeComponent(1)
+//                    let oc2 = OtherComponent(2)
+//
+//                    mgr!.setComponent(sc0, forEntity: e0)
+//                    mgr!.setComponent(sc1, forEntity: e1)
+//                    mgr!.setComponent(oc2, forEntity: e2)
+//
+//                    mgr!.allComponentsOfType
+//                }
+//            }
 
 //            // ------------------------------------------------------------
 //            // all()
