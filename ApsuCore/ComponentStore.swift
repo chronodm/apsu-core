@@ -12,6 +12,29 @@ protocol ComponentStore {
     mutating func removeComponentFor(entity: Entity) -> Any?
 }
 
+
+public class ComponentRef<T>: Equatable {
+    public let entity: Entity
+    public let component: T
+
+    init(entity: Entity, component: T) {
+        self.entity = entity
+        self.component = component
+    }
+}
+
+// ------------------------------------------------------------
+// MARK: - Equatable
+
+//public func == <T: Equatable> (lhs: ComponentRef<T>, rhs: ComponentRef<T>) -> Bool {
+//    return lhs.entity == rhs.entity && lhs.component == rhs.component
+//}
+
+// TODO: get this working & change TypedComponentStore to return a sequence of it
+public func == <T> (lhs: ComponentRef<T>, rhs: ComponentRef<T>) -> Bool {
+    return (lhs.component === rhs.component) // && (lhs.entity == rhs.entity)
+}
+
 class TypedComponentStore<T>: ComponentStore, SequenceType {
 
     // ------------------------------------------------------------

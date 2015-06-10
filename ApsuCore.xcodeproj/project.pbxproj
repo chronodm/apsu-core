@@ -16,7 +16,6 @@
 		63C19D4219673E710055B3F1 /* ApsuCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C19D3619673E710055B3F1 /* ApsuCore.framework */; };
 		63C19D53196740220055B3F1 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C19D52196740220055B3F1 /* Entity.swift */; };
 		63C19D57196751FE0055B3F1 /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C19D56196751FE0055B3F1 /* EntityManager.swift */; };
-		63ED658C1B27CBC100BEF9C6 /* TupleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED658B1B27CBC100BEF9C6 /* TupleExtensions.swift */; };
 		63F3F14E1A9966B7007BF513 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63F3F1421A99665B007BF513 /* Quick.framework */; };
 		63F3F1501A996789007BF513 /* EntitySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F3F14F1A996789007BF513 /* EntitySpec.swift */; };
 		63F3F1621A99941E007BF513 /* CFUUIDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F3F1611A99941E007BF513 /* CFUUIDExtensions.swift */; };
@@ -115,7 +114,6 @@
 		63C19D4719673E710055B3F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63C19D52196740220055B3F1 /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		63C19D56196751FE0055B3F1 /* EntityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
-		63ED658B1B27CBC100BEF9C6 /* TupleExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TupleExtensions.swift; sourceTree = "<group>"; };
 		63F3F12C1A99665B007BF513 /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = Vendor/Quick/Quick.xcodeproj; sourceTree = SOURCE_ROOT; };
 		63F3F14F1A996789007BF513 /* EntitySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntitySpec.swift; sourceTree = "<group>"; };
 		63F3F1611A99941E007BF513 /* CFUUIDExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CFUUIDExtensions.swift; sourceTree = "<group>"; };
@@ -158,7 +156,6 @@
 			children = (
 				63F3F1611A99941E007BF513 /* CFUUIDExtensions.swift */,
 				5AF0E88C5ED917CFF0070725 /* Exceptions.swift */,
-				63ED658B1B27CBC100BEF9C6 /* TupleExtensions.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -434,7 +431,6 @@
 				5AF0ED33633E192A7997BFA5 /* Exceptions.swift in Sources */,
 				5AF0E758702840B326CC7D52 /* ComponentTypeKey.swift in Sources */,
 				5AF0EFEBD88BB85EE6F1A2C1 /* ComponentStore.swift in Sources */,
-				63ED658C1B27CBC100BEF9C6 /* TupleExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
