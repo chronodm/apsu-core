@@ -96,14 +96,14 @@ public class EntityManager {
         return false
     }
 
-//    public func allComponentsOfType<T: AnyObject>(type: T.Type) -> SequenceOf<(Entity, T)> {
-//        if let existingMap = components[KeyForType(type)] {
-//            return SequenceOf(existingMap)
-//        } else {
-//            let emptyMap: [Entity:T] = [:]
-//            return SequenceOf(emptyMap)
-//        }
-//    }
+    public func allComponentsOfType<T: AnyObject>(type: T.Type) -> AnySequence<(Entity, T)> {
+        if let existingMap: TypedComponentStore<T> = components[ComponentTypeKey(type)] as?(TypedComponentStore<T>) {
+            return AnySequence(existingMap)
+        } else {
+            let emptyMap = [Entity:T]()
+            return AnySequence(emptyMap)
+        }
+    }
 /*
   override def allComponents(e: Entity): Iterable[Any] = {
     components.values.map((m) => m.get(e)).flatten
