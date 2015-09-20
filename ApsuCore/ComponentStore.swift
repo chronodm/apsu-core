@@ -12,7 +12,7 @@ protocol ComponentStore {
     mutating func removeComponentFor(entity: Entity) -> Any?
 }
 
-
+// TODO: Give up and force components to be Equatable?
 public class ComponentRef<T>: Equatable {
     public let entity: Entity
     public let component: T
@@ -32,7 +32,16 @@ public class ComponentRef<T>: Equatable {
 
 // TODO: get this working & change TypedComponentStore to return a sequence of it
 public func == <T> (lhs: ComponentRef<T>, rhs: ComponentRef<T>) -> Bool {
-    return (lhs.component === rhs.component) // && (lhs.entity == rhs.entity)
+    if (lhs.entity == rhs.entity) {
+        switch (lhs.component, rhs.component) {
+            case let (l, r) as (AnyObject, AnyObject):
+                return ObjectIdentifier(l) == ObjectIdentifier(r)
+            default:
+                return false
+        }
+        return true
+    }
+    return false
 }
 
 class TypedComponentStore<T>: ComponentStore, SequenceType {

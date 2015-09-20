@@ -21,5 +21,5 @@ public class ComponentTypeKey: Hashable {
 }
 
 public func == (lhs: ComponentTypeKey, rhs: ComponentTypeKey) -> Bool {
-    return CFEqual(lhs.type, rhs.type) != 0
+    return CFEqual(lhs.type, rhs.type)
 }

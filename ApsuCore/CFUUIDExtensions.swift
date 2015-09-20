@@ -10,5 +10,5 @@
 extension CFUUID: Equatable {}
 
 public func == (lhs: CFUUID, rhs: CFUUID) -> Bool {
-    return CFEqual(lhs, rhs) != 0
+    return CFEqual(lhs, rhs)
 }
